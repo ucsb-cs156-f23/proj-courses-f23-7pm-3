@@ -89,7 +89,6 @@ export const isSectionCancelled = (section) => {
   return section.courseCancelled !== null;
 };
 
-
 export const isSection = (en1) => {
   return en1.substring(2) !== "00";
 };
