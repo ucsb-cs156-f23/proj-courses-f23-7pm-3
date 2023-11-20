@@ -67,8 +67,8 @@ import org.springframework.web.bind.annotation.RestController;
 <span class="fc" id="L67">              startQtr, endQtr, &quot;^&quot; + instructor.toUpperCase(), &quot;^(Teaching and in charge)&quot;);</span>
     } else {
 <span class="fc" id="L69">      courseResults =</span>
-<span class="fc" id="L70">        convertedSectionCollection.findByQuarterRangeAndInstructor(</span>
-<span class="fc" id="L71">        startQtr, endQtr, &quot;^&quot; + instructor.toUpperCase(), &quot;^.*&quot;);</span>
+<span class="fc" id="L70">          convertedSectionCollection.findByQuarterRangeAndInstructor(</span>
+<span class="fc" id="L71">              startQtr, endQtr, &quot;^&quot; + instructor.toUpperCase(), &quot;^.*&quot;);</span>
     }
 <span class="fc" id="L73">    String body = mapper.writeValueAsString(courseResults);</span>
 <span class="fc" id="L74">    return ResponseEntity.ok().body(body);</span>
