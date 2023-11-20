@@ -9,8 +9,8 @@ import {
   formatTime,
   isSection,
   isSectionCancelled,
-  isSectionFull,
   isSectionClosed,
+  isSectionFull,
 } from "main/utils/sectionUtils.js";
 
 function getFirstVal(values) {
@@ -62,8 +62,8 @@ export default function SectionsOverTimeTable({ sections }) {
       Header: "Status",
       accessor: (row) => {
         if (isSectionCancelled(row.section)) return "CANCELLED";
-        else if (isSectionFull(row.section)) return "FULL";
         else if (isSectionClosed(row.section)) return "CLOSED";
+        else if (isSectionFull(row.section)) return "FULL";
         else return "OPEN";
       },
       disableGroupBy: true,

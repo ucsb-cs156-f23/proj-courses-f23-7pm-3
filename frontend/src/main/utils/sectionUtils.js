@@ -77,10 +77,6 @@ export const formatInstructors = (instructorArray) => {
   }
 };
 
-export const isSectionCancelled = (section) => {
-  return section.courseCancelled !== null;
-};
-
 export const isSectionFull = (section) => {
   return section.enrolledTotal >= section.maxEnroll;
 };
@@ -88,6 +84,11 @@ export const isSectionFull = (section) => {
 export const isSectionClosed = (section) => {
   return section.classClosed !== null;
 };
+
+export const isSectionCancelled = (section) => {
+  return section.courseCancelled !== null;
+};
+
 
 export const isSection = (en1) => {
   return en1.substring(2) !== "00";

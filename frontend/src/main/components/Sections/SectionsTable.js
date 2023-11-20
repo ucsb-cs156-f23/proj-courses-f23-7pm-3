@@ -8,9 +8,9 @@ import {
   formatLocation,
   formatTime,
   isSection,
-  isSectionFull,
   isSectionCancelled,
   isSectionClosed,
+  isSectionFull,
 } from "main/utils/sectionUtils.js";
 
 function getFirstVal(values) {
