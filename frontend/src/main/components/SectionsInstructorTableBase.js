@@ -44,8 +44,7 @@ export default function SectionsInstructorTableBase({
           prepareRow(row);
           return (
             <Fragment key={`row-${i}`}>
-              {row.cells[0].isGrouped ||
-              (!row.cells[0].isGrouped && row.allCells[3].value) ? (
+              {(
                 <tr {...row.getRowProps()}>
                   {row.cells.map((cell, _index) => {
                     return (
@@ -55,43 +54,17 @@ export default function SectionsInstructorTableBase({
                         // Stryker disable next-line ObjectLiteral
                         style={{
                           background: (!row.allCells[3].value)  //is not a section
-                            ? cell.isGrouped
-                              ? "#34859b"
-                              : cell.isAggregated
-                              ? "#34859b"
-                              : "#9dbfbe"
+                            ? "#34859b"
                             : "#9dbfbe",
                           color: (!row.allCells[3].value)   // is not a section
-                            ? cell.isGrouped
-                              ? "#effcf4"
-                              : cell.isAggregated
-                              ? "#effcf4"
-                              : "#000000"
+                            ? "#effcf4"
                             : "#000000",
                           fontWeight: (!row.allCells[3].value) //is not a section
-                            ? cell.isGrouped
-                              ? "bold"
-                              : cell.isAggregated
-                              ? "bold"
-                              : "normal"
+                            ? "bold"
                             : "normal",
                         }}
                       >
-                        {cell.isGrouped ? (
-                          <>
-                            <span
-                              {...row.getToggleRowExpandedProps()}
-                              data-testid={`${testid}-cell-row-${cell.row.index}-col-${cell.column.id}-expand-symbols`}
-                            >
-                              {row.subRows.length > 1
-                                ? row.isExpanded
-                                  ? "➖ "
-                                  : "➕ "
-                                : null}
-                            </span>{" "}
-                            {cell.render("Aggregated")}
-                          </>
-                        ) : cell.isAggregated ? (
+                        {cell.isAggregated ? (
                           cell.render("Aggregated")
                         ) : (
                           cell.render("Cell")
@@ -101,7 +74,7 @@ export default function SectionsInstructorTableBase({
                     );
                   })}
                 </tr>
-              ) : null}
+              )}
             </Fragment>
           );
         })}
