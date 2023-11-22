@@ -24,7 +24,7 @@ describe("Section tests", () => {
     );
   });
 
-  test("Has the expected column headers and content", async () => {
+  test("Has the expected column headers and content for both lecture and section", async () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
@@ -93,5 +93,12 @@ describe("Section tests", () => {
     expect(
       screen.getByTestId(`${testId}-cell-row-0-col-section.enrollCode`),
     ).toHaveTextContent("12583");
+
+    expect(
+      screen.getByTestId(`${testId}-cell-row-2-col-section.enrollCode`),
+    ).toHaveTextContent("12609");
+    expect(
+      screen.getByTestId(`${testId}-cell-row-2-col-instructor`),
+    ).toHaveTextContent("YUNG A S");
   });
 });

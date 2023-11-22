@@ -1,5 +1,10 @@
+import { render, screen } from "@testing-library/react";
 import SectionsInstructorTableBase from "main/components/SectionsInstructorTableBase";
-
+import {
+  oneLectureSectionWithNoDiscussion,
+  gigaSections,
+  fiveSections,
+} from "fixtures/sectionFixtures";
 import { yyyyqToQyy } from "main/utils/quarterUtilities.js";
 import {
   convertToFraction,
@@ -10,22 +15,20 @@ import {
   isSection,
 } from "main/utils/sectionUtils.js";
 
-export default function SectionsInstructorTable({ sections }) {
-  // Stryker enable all
-  // Stryker disable BooleanLiteral
-  const columns = [
-    {
-      Header: "Course ID",
-      accessor: "courseInfo.courseId",
+describe("SectionsInstructorTableBase tests", () => {
 
-      disableGroupBy: true,
-      Cell: ({ cell: { value } }) => value.substring(0, value.length - 2),
-    },
+  const columns = [
     {
       Header: "Quarter",
       accessor: (row) => yyyyqToQyy(row.courseInfo.quarter),
       disableGroupBy: true,
       id: "quarter",
+    },
+    {
+      Header: "Course ID",
+      accessor: "courseInfo.courseId",
+
+      Cell: ({ cell: { value } }) => value.substring(0, value.length - 2),
     },
     {
       Header: "Title",
@@ -35,7 +38,6 @@ export default function SectionsInstructorTable({ sections }) {
     {
       // Stryker disable next-line StringLiteral: this column is hidden, very hard to test
       Header: "Is Section?",
-      // Stryker disable next-line all: this column is hidden, very hard to test (we never click the + or - button so this never gets tested)
       accessor: (row) => isSection(row.section.section),
       // Stryker disable next-line StringLiteral: this column is hidden, very hard to test
       id: "isSection",
@@ -78,15 +80,34 @@ export default function SectionsInstructorTable({ sections }) {
     },
   ];
 
-  const testid = "SectionsInstructorTable";
+  test("renders an empty table without crashing", () => {
+    render(<SectionsInstructorTableBase columns={columns} data={[]} group={false} />);
+  });
 
-  const columnsToDisplay = columns;
+  test("renders an full table without crashing", () => {
+    render(
+      <SectionsInstructorTableBase columns={columns} data={gigaSections} group={false} />,
+    );
+  });
 
-  return (
-    <SectionsInstructorTableBase
-      data={sections}
-      columns={columnsToDisplay}
-      testid={testid}
-    />
-  );
-}
+  test("renders a single lecture section correctly", async () => {
+    render(
+      <SectionsInstructorTableBase
+        columns={columns}
+        data={oneLectureSectionWithNoDiscussion}
+        group={false}
+      />,
+    );
+
+    expect(screen.queryByText("➖")).not.toBeInTheDocument();
+    expect(screen.queryByText("➕")).not.toBeInTheDocument();
+    expect(screen.queryByText("Is Section?")).not.toBeInTheDocument();
+    
+    expect(
+        screen.getByTestId("testid-cell-row-0-col-courseInfo.courseId"),
+      ).toHaveAttribute(
+        "style",
+        "background: rgb(52, 133, 155); color: rgb(239, 252, 244); font-weight: bold;",
+      );
+});
+});

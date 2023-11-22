@@ -3,11 +3,7 @@ import { useTable, useGroupBy, useExpanded } from "react-table";
 import { Table } from "react-bootstrap";
 
 // Stryker disable StringLiteral, ArrayDeclaration
-export default function SectionsInstructorTableBase({
-  columns,
-  data,
-  testid,
-}) {
+export default function SectionsInstructorTableBase({ columns, data, testid = "testid" }) {
   // Stryker disable next-line ObjectLiteral
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable(
@@ -44,7 +40,7 @@ export default function SectionsInstructorTableBase({
           prepareRow(row);
           return (
             <Fragment key={`row-${i}`}>
-              {(
+              {
                 <tr {...row.getRowProps()}>
                   {row.cells.map((cell, _index) => {
                     return (
@@ -53,13 +49,13 @@ export default function SectionsInstructorTableBase({
                         data-testid={`${testid}-cell-row-${cell.row.index}-col-${cell.column.id}`}
                         // Stryker disable next-line ObjectLiteral
                         style={{
-                          background: (!row.allCells[3].value)  //is not a section
+                          background: !row.allCells[3].value
                             ? "#34859b"
                             : "#9dbfbe",
-                          color: (!row.allCells[3].value)   // is not a section
+                          color: !row.allCells[3].value
                             ? "#effcf4"
                             : "#000000",
-                          fontWeight: (!row.allCells[3].value) //is not a section
+                          fontWeight: !row.allCells[3].value
                             ? "bold"
                             : "normal",
                         }}
@@ -70,7 +66,7 @@ export default function SectionsInstructorTableBase({
                     );
                   })}
                 </tr>
-              )}
+              }
             </Fragment>
           );
         })}
