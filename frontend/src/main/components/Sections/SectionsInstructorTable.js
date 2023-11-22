@@ -16,17 +16,17 @@ export default function SectionsInstructorTable({ sections }) {
   // Stryker disable BooleanLiteral
   const columns = [
     {
-      Header: "Quarter",
-      accessor: (row) => yyyyqToQyy(row.courseInfo.quarter),
-      disableGroupBy: true,
-      id: "quarter",
-    },
-    {
       Header: "Course ID",
       accessor: "courseInfo.courseId",
 
       disableGroupBy: true,
       Cell: ({ cell: { value } }) => value.substring(0, value.length - 2),
+    },
+    {
+      Header: "Quarter",
+      accessor: (row) => yyyyqToQyy(row.courseInfo.quarter),
+      disableGroupBy: true,
+      id: "quarter",
     },
     {
       Header: "Title",
