@@ -6,7 +6,7 @@ import { Table } from "react-bootstrap";
 export default function SectionsInstructorTableBase({
   columns,
   data,
-  testid = "testid",
+  testid,
 }) {
   // Stryker disable next-line ObjectLiteral
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
@@ -64,11 +64,7 @@ export default function SectionsInstructorTableBase({
                             : "normal",
                         }}
                       >
-                        {cell.isAggregated ? (
-                          cell.render("Aggregated")
-                        ) : (
-                          cell.render("Cell")
-                        )}
+                        {cell.render("Cell")}
                         <></>
                       </td>
                     );

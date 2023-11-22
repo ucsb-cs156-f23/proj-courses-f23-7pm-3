@@ -10,9 +10,6 @@ import {
   isSection,
 } from "main/utils/sectionUtils.js";
 
-function getFirstVal(values) {
-  return values[0];
-}
 
 export default function SectionsInstructorTable({ sections }) {
   // Stryker enable all
@@ -23,9 +20,6 @@ export default function SectionsInstructorTable({ sections }) {
       accessor: (row) => yyyyqToQyy(row.courseInfo.quarter),
       disableGroupBy: true,
       id: "quarter",
-
-      aggregate: getFirstVal,
-      Aggregated: ({ cell: { value } }) => `${value}`,
     },
     {
       Header: "Course ID",
@@ -38,9 +32,6 @@ export default function SectionsInstructorTable({ sections }) {
       Header: "Title",
       accessor: "courseInfo.title",
       disableGroupBy: true,
-
-      aggregate: getFirstVal,
-      Aggregated: ({ cell: { value } }) => `${value}`,
     },
     {
       // Stryker disable next-line StringLiteral: this column is hidden, very hard to test
@@ -49,9 +40,6 @@ export default function SectionsInstructorTable({ sections }) {
       // Stryker disable next-line StringLiteral: this column is hidden, very hard to test
       id: "isSection",
       disableGroupBy: true,
-
-      aggregate: getFirstVal,
-      Aggregated: ({ cell: { value } }) => `${value}`,
     },
     {
       Header: "Enrolled",
@@ -59,53 +47,35 @@ export default function SectionsInstructorTable({ sections }) {
         convertToFraction(row.section.enrolledTotal, row.section.maxEnroll),
       disableGroupBy: true,
       id: "enrolled",
-
-      aggregate: getFirstVal,
-      Aggregated: ({ cell: { value } }) => `${value}`,
     },
     {
       Header: "Location",
       accessor: (row) => formatLocation(row.section.timeLocations),
       disableGroupBy: true,
       id: "location",
-
-      aggregate: getFirstVal,
-      Aggregated: ({ cell: { value } }) => `${value}`,
     },
     {
       Header: "Days",
       accessor: (row) => formatDays(row.section.timeLocations),
       disableGroupBy: true,
       id: "days",
-
-      aggregate: getFirstVal,
-      Aggregated: ({ cell: { value } }) => `${value}`,
     },
     {
       Header: "Time",
       accessor: (row) => formatTime(row.section.timeLocations),
       disableGroupBy: true,
       id: "time",
-
-      aggregate: getFirstVal,
-      Aggregated: ({ cell: { value } }) => `${value}`,
     },
     {
       Header: "Instructor",
       accessor: (row) => formatInstructors(row.section.instructors),
       disableGroupBy: true,
       id: "instructor",
-
-      aggregate: getFirstVal,
-      Aggregated: ({ cell: { value } }) => `${value}`,
     },
     {
       Header: "Enroll Code",
       accessor: "section.enrollCode",
       disableGroupBy: true,
-
-      aggregate: getFirstVal,
-      Aggregated: ({ cell: { value } }) => `${value}`,
     }
   ];
 
