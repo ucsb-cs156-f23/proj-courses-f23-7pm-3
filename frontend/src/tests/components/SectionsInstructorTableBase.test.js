@@ -3,7 +3,6 @@ import SectionsInstructorTableBase from "main/components/SectionsInstructorTable
 import {
   oneLectureSectionWithNoDiscussion,
   gigaSections,
-  fiveSections,
 } from "fixtures/sectionFixtures";
 import { yyyyqToQyy } from "main/utils/quarterUtilities.js";
 import {
@@ -16,7 +15,6 @@ import {
 } from "main/utils/sectionUtils.js";
 
 describe("SectionsInstructorTableBase tests", () => {
-
   const columns = [
     {
       Header: "Quarter",
@@ -81,12 +79,18 @@ describe("SectionsInstructorTableBase tests", () => {
   ];
 
   test("renders an empty table without crashing", () => {
-    render(<SectionsInstructorTableBase columns={columns} data={[]} group={false} />);
+    render(
+      <SectionsInstructorTableBase columns={columns} data={[]} group={false} />,
+    );
   });
 
   test("renders an full table without crashing", () => {
     render(
-      <SectionsInstructorTableBase columns={columns} data={gigaSections} group={false} />,
+      <SectionsInstructorTableBase
+        columns={columns}
+        data={gigaSections}
+        group={false}
+      />,
     );
   });
 
@@ -102,12 +106,12 @@ describe("SectionsInstructorTableBase tests", () => {
     expect(screen.queryByText("➖")).not.toBeInTheDocument();
     expect(screen.queryByText("➕")).not.toBeInTheDocument();
     expect(screen.queryByText("Is Section?")).not.toBeInTheDocument();
-    
+
     expect(
-        screen.getByTestId("testid-cell-row-0-col-courseInfo.courseId"),
-      ).toHaveAttribute(
-        "style",
-        "background: rgb(52, 133, 155); color: rgb(239, 252, 244); font-weight: bold;",
-      );
-});
+      screen.getByTestId("testid-cell-row-0-col-courseInfo.courseId"),
+    ).toHaveAttribute(
+      "style",
+      "background: rgb(52, 133, 155); color: rgb(239, 252, 244); font-weight: bold;",
+    );
+  });
 });
