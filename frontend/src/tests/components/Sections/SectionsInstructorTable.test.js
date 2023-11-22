@@ -1,5 +1,5 @@
-import { fireEvent, render, screen } from "@testing-library/react";
-import { fiveSections, gigaSections } from "fixtures/sectionFixtures";
+import { render, screen } from "@testing-library/react";
+import { fiveSections } from "fixtures/sectionFixtures";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
 import SectionsInstructorTable from "main/components/Sections/SectionsInstructorTable";
