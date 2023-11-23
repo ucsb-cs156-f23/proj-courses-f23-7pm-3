@@ -23,7 +23,6 @@ function SingleQuarterDropdown({
   if (localStorage.getItem("PersonalScheduleForm-quarter") == null) {
     localStorage.setItem("PersonalScheduleForm-quarter", quarters[0].yyyyq);
   }
-  
   const localSearchQuarter = localStorage.getItem(controlId);
 
   const [quarterState, setQuarterState] = useState(
