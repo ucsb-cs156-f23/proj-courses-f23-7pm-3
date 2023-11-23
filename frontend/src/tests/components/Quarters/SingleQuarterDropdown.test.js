@@ -149,14 +149,11 @@ describe("SingleQuarterSelector tests", () => {
     await waitFor(() => expect(useState).toBeCalledWith("20201"));
   });
 
-  test("localStorage has a value when rendered", async () => {
+  test("when localstorage has no value, localstorage is set to first element of quarters", async () => {
     const getItemSpy = jest.spyOn(Storage.prototype, "getItem");
     getItemSpy.mockImplementation(() => null);
 
-    const setQuarterStateSpy = jest.fn();
-    useState.mockImplementation((x) => [x, setQuarterStateSpy]);
-
-    jest.spyOn(Storage.prototype, "setItem");
+    const setItemSpy = jest.spyOn(Storage.prototype, "setItem");
 
     render(
       <SingleQuarterDropdown
@@ -167,12 +164,6 @@ describe("SingleQuarterSelector tests", () => {
       />,
     );
 
-    await waitFor(
-      () => expect(useState).toBeCalledWith("20201"),
-      expect(localStorage.setItem).toBeCalledWith(
-        "PersonalScheduleForm-quarter",
-        "20201",
-      ),
-    );
+    await waitFor(() => expect(setItemSpy).toBeCalledWith("sqd1", "20201"));
   });
 });
