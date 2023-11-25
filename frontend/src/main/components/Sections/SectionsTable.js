@@ -44,7 +44,7 @@ export default function SectionsTable({ sections }) {
     {
       // Stryker disable next-line StringLiteral: this column is hidden, very hard to test
       Header: "Is Section?",
-      accessor: (row) => isSection(row.section.section),
+      accessor: (row) => isSection(row.section.enrollCode),
       // Stryker disable next-line StringLiteral: this column is hidden, very hard to test
       id: "isSection",
     },
