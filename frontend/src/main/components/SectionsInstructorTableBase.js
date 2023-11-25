@@ -53,10 +53,10 @@ export default function SectionsInstructorTableBase({
                         data-testid={`${testid}-cell-row-${cell.row.index}-col-${cell.column.id}`}
                         // Stryker disable next-line ObjectLiteral
                         style={{
-                          background: !row.allCells[3].value  //Checks if the row we have is a section
+                          background: !row.allCells[3].value //Checks if the row we have is a section
                             ? "#34859b"
                             : "#9dbfbe",
-                          color: !row.allCells[3].value ? "#effcf4" : "#000000",  //Prettier really wants this line to be formatted strangely, so I'm leaving it as is
+                          color: !row.allCells[3].value ? "#effcf4" : "#000000", //Prettier really wants this line to be formatted strangely, so I'm leaving it as is
                           fontWeight: !row.allCells[3].value
                             ? "bold"
                             : "normal",
