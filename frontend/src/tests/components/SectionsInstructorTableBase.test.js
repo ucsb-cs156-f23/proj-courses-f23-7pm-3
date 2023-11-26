@@ -3,6 +3,7 @@ import SectionsInstructorTableBase from "main/components/SectionsInstructorTable
 import {
   oneLectureSectionWithNoDiscussion,
   gigaSections,
+  threeSections,
 } from "fixtures/sectionFixtures";
 import { yyyyqToQyy } from "main/utils/quarterUtilities.js";
 import {
@@ -11,7 +12,6 @@ import {
   formatInstructors,
   formatLocation,
   formatTime,
-  isSection,
 } from "main/utils/sectionUtils.js";
 
 describe("SectionsInstructorTableBase tests", () => {
@@ -32,13 +32,6 @@ describe("SectionsInstructorTableBase tests", () => {
       Header: "Title",
       accessor: "courseInfo.title",
       disableGroupBy: true,
-    },
-    {
-      // Stryker disable next-line StringLiteral: this column is hidden, very hard to test
-      Header: "Is Section?",
-      accessor: (row) => isSection(row.section.section),
-      // Stryker disable next-line StringLiteral: this column is hidden, very hard to test
-      id: "isSection",
     },
     {
       Header: "Enrolled",
@@ -112,6 +105,27 @@ describe("SectionsInstructorTableBase tests", () => {
     ).toHaveAttribute(
       "style",
       "background: rgb(52, 133, 155); color: rgb(239, 252, 244); font-weight: bold;",
+    );
+  });
+
+  test("renders a discussion section correctly", async () => {
+    render(
+      <SectionsInstructorTableBase
+        columns={columns}
+        data={threeSections}
+        group={false}
+      />,
+    );
+
+    expect(screen.queryByText("➖")).not.toBeInTheDocument();
+    expect(screen.queryByText("➕")).not.toBeInTheDocument();
+    expect(screen.queryByText("Is Section?")).not.toBeInTheDocument();
+
+    expect(
+      screen.getByTestId("testid-cell-row-2-col-courseInfo.courseId"),
+    ).toHaveAttribute(
+      "style",
+      "background: rgb(157, 191, 190); color: rgb(0, 0, 0); font-weight: normal;",
     );
   });
 });

@@ -7,7 +7,6 @@ import {
   formatInstructors,
   formatLocation,
   formatTime,
-  isSection,
 } from "main/utils/sectionUtils.js";
 
 export default function SectionsInstructorTable({ sections }) {
@@ -26,14 +25,6 @@ export default function SectionsInstructorTable({ sections }) {
     {
       Header: "Title",
       accessor: "courseInfo.title",
-    },
-    {
-      // Stryker disable next-line StringLiteral: this column is hidden, very hard to test
-      Header: "Is Section?",
-      // Stryker disable next-line all: this column is hidden, very hard to test (we never click the + or - button so this never gets tested)
-      accessor: (row) => isSection(row.section.section),
-      // Stryker disable next-line StringLiteral: this column is hidden, very hard to test
-      id: "isSection",
     },
     {
       Header: "Enrolled",
@@ -69,12 +60,10 @@ export default function SectionsInstructorTable({ sections }) {
 
   const testid = "SectionsInstructorTable";
 
-  const columnsToDisplay = columns;
-
   return (
     <SectionsInstructorTableBase
       data={sections}
-      columns={columnsToDisplay}
+      columns={columns}
       testid={testid}
     />
   );

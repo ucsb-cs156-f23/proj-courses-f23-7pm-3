@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { useTable, useGroupBy, useExpanded } from "react-table";
 import { Table } from "react-bootstrap";
 
@@ -12,10 +12,6 @@ export default function SectionsInstructorTableBase({
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable(
       {
-        initialState: {
-          groupBy: [],
-          hiddenColumns: ["isSection"],
-        },
         columns,
         data,
       },
@@ -25,7 +21,7 @@ export default function SectionsInstructorTableBase({
 
   return (
     <Table {...getTableProps()} striped bordered hover>
-      <thead key="thead">
+      <thead>
         {headerGroups.map((headerGroup) => (
           <tr {...headerGroup.getHeaderGroupProps()}>
             {headerGroup.headers.map((column) => (
@@ -39,37 +35,37 @@ export default function SectionsInstructorTableBase({
           </tr>
         ))}
       </thead>
-      <tbody {...getTableBodyProps()} key="tbody">
-        {rows.map((row, i) => {
+      <tbody {...getTableBodyProps()}>
+        {rows.map((row) => {
           prepareRow(row);
           return (
-            <Fragment key={`row-${i}`}>
-              {
-                <tr {...row.getRowProps()}>
-                  {row.cells.map((cell, _index) => {
-                    return (
-                      <td
-                        {...cell.getCellProps()}
-                        data-testid={`${testid}-cell-row-${cell.row.index}-col-${cell.column.id}`}
-                        // Stryker disable next-line ObjectLiteral
-                        style={{
-                          background: !row.allCells[3].value //Checks if the row we have is a section
-                            ? "#34859b"
-                            : "#9dbfbe",
-                          color: !row.allCells[3].value ? "#effcf4" : "#000000", //Prettier really wants this line to be formatted strangely, so I'm leaving it as is
-                          fontWeight: !row.allCells[3].value
-                            ? "bold"
-                            : "normal",
-                        }}
-                      >
-                        {cell.render("Cell")}
-                        <></>
-                      </td>
-                    );
-                  })}
-                </tr>
-              }
-            </Fragment>
+            <tr {...row.getRowProps()}>
+              {row.cells.map((cell, _index) => {
+                return (
+                  <td
+                    {...cell.getCellProps()}
+                    data-testid={`${testid}-cell-row-${cell.row.index}-col-${cell.column.id}`}
+                    // Stryker disable next-line ObjectLiteral
+                    style={{
+                      background:
+                        data[cell.row.index].section.section % 100 === 0 //Checks if the row we have is a section by seeing if "section" field ends in "00"
+                          ? "#34859b"
+                          : "#9dbfbe",
+                      color:
+                        data[cell.row.index].section.section % 100 === 0
+                          ? "#effcf4"
+                          : "#000000",
+                      fontWeight:
+                        data[cell.row.index].section.section % 100 === 0
+                          ? "bold"
+                          : "normal",
+                    }}
+                  >
+                    {cell.render("Cell")}
+                  </td>
+                );
+              })}
+            </tr>
           );
         })}
       </tbody>
