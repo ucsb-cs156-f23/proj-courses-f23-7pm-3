@@ -31,7 +31,7 @@ import org.springframework.test.web.servlet.MvcResult;
 @Import(SecurityConfig.class)
 @AutoConfigureDataJpa
 public class CourseOverTimeBuildingControllerTests {
-  
+
   private ObjectMapper mapper = new ObjectMapper();
 
   @Autowired private MockMvc mockMvc;
@@ -105,4 +105,3 @@ public class CourseOverTimeBuildingControllerTests {
     assertEquals(expectedString, responseString);
   }
 }
-
