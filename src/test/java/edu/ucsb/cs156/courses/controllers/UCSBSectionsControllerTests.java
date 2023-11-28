@@ -11,7 +11,7 @@ import edu.ucsb.cs156.courses.config.SecurityConfig;
 import edu.ucsb.cs156.courses.repositories.UserRepository;
 import edu.ucsb.cs156.courses.services.UCSBCurriculumService;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.LoggerFactory;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureDataJpa;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -25,7 +25,7 @@ import org.springframework.test.web.servlet.MvcResult;
 @Import(SecurityConfig.class)
 @AutoConfigureDataJpa
 public class UCSBSectionsControllerTests {
-
+  
   private ObjectMapper mapper = new ObjectMapper();
 
   @MockBean UserRepository userRepository;
