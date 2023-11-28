@@ -2,7 +2,7 @@ const courseDetailsFixtures = {
   twoCourses: [
     {
       quarter: "20211",
-      enrollmentCode: "ABC123",
+      enrollmentCode: "12345",
       courseId: "CMPSC 111",
       title: "Intro to Computational Science",
       enrolled: "87",
@@ -13,7 +13,7 @@ const courseDetailsFixtures = {
     },
     {
       quarter: "20223",
-      enrollmentCode: "CDF456",
+      enrollmentCode: "23456",
       courseId: "CMPSC 156",
       title: "Advanced App Development",
       enrolled: "70",
@@ -26,7 +26,7 @@ const courseDetailsFixtures = {
   oneCourse: [
     {
       quarter: "20211",
-      enrollmentCode: "ABC123",
+      enrollmentCode: "01234",
       courseId: "CMPSC 111",
       title: "Intro to Computational Science",
       enrolled: "87",
