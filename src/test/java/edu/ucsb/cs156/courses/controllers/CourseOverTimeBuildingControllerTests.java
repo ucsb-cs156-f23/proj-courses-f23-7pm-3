@@ -105,3 +105,4 @@ public class CourseOverTimeBuildingControllerTests {
     assertEquals(expectedString, responseString);
   }
 }
+
