@@ -25,7 +25,7 @@ import org.springframework.test.web.servlet.MvcResult;
 @Import(SecurityConfig.class)
 @AutoConfigureDataJpa
 public class UCSBCurriculumControllerTests {
-  
+
   private ObjectMapper mapper = new ObjectMapper();
 
   @MockBean UserRepository userRepository;
