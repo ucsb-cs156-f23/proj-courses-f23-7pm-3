@@ -27,8 +27,15 @@ export default function CoursesCreatePage() {
 
   const { isSuccess } = mutation;
 
+  // Code from PersonalSchedulesCreatePage, we want to turn schedule string into int ID
   const onSubmit = async (data) => {
-    mutation.mutate(data);
+    const psId = {
+      psId: localStorage["CourseForm-psId"],
+    };
+    console.log(psId);
+    const dataFinal = Object.assign(data, psId);
+    console.log(dataFinal);
+    mutation.mutate(dataFinal);
   };
 
   if (isSuccess) {

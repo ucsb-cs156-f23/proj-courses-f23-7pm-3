@@ -80,7 +80,7 @@ describe("CoursesCreatePage tests", () => {
     const enrollCdField = screen.getByTestId("CourseForm-enrollCd");
     const submitButton = screen.getByTestId("CourseForm-submit");
 
-    fireEvent.change(psIdField, { target: { value: 13 } });
+    //fireEvent.change(psIdField, { target: { value: 13 } });
     fireEvent.change(enrollCdField, { target: { value: "08250" } });
 
     expect(submitButton).toBeInTheDocument();
