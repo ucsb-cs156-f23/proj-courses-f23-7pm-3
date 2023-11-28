@@ -31,6 +31,7 @@ import org.springframework.test.web.servlet.MvcResult;
 @Import(SecurityConfig.class)
 @AutoConfigureDataJpa
 public class CourseOverTimeInstructorControllerTests {
+  
   private ObjectMapper mapper = new ObjectMapper();
 
   @Autowired private MockMvc mockMvc;
