@@ -1,4 +1,6 @@
 import SectionsTableBase from "main/components/SectionsTableBase";
+import { ButtonColumn } from "main/components/OurTable";
+import { useNavigate } from "react-router-dom";
 
 import { yyyyqToQyy } from "main/utils/quarterUtilities.js";
 import {
@@ -18,6 +20,13 @@ function getFirstVal(values) {
 }
 
 export default function SectionsTable({ sections }) {
+  const navigate = useNavigate();
+
+  // Stryker disable next-line all : TODO try to make a good test for this
+  const infoCallback = () => {
+    navigate(`/coursedetails/`);
+  };
+
   // Stryker enable all
   // Stryker disable BooleanLiteral
   const columns = [
@@ -120,6 +129,8 @@ export default function SectionsTable({ sections }) {
       Aggregated: ({ cell: { value } }) => `${value}`,
     },
   ];
+
+  columns.unshift(ButtonColumn("Info", "ℹ", "primary", infoCallback, "SectionsTable"));
 
   const testid = "SectionsTable";
 

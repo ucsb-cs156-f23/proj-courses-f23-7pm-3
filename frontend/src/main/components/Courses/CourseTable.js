@@ -38,8 +38,8 @@ export default function CourseTable({ courses, currentUser }) {
 
   const columnsIfUser = [
     ...columns,
-    // ButtonColumn("Edit", "primary", editCallback, "PersonalSchedulesTable"),
-    ButtonColumn("Delete", "danger", deleteCallback, "CourseTable"),
+    // ButtonColumn("Edit", "Edit", "primary", editCallback, "PersonalSchedulesTable"),
+    ButtonColumn("Delete", "Delete", "danger", deleteCallback, "CourseTable"),
   ];
 
   const columnsToDisplay = hasRole(currentUser, "ROLE_USER")

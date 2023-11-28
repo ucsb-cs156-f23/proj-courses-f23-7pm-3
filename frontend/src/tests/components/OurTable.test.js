@@ -37,7 +37,7 @@ describe("OurTable tests", () => {
       Header: "Column 2",
       accessor: "col2",
     },
-    ButtonColumn("Click", "primary", clickMeCallback, "testId"),
+    ButtonColumn("Click", "Click", "primary", clickMeCallback, "testId"),
     DateColumn("Date", (cell) => cell.row.original.createdAt),
     PlaintextColumn("Log", (cell) => cell.row.original.log),
   ];

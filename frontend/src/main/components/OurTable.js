@@ -90,11 +90,11 @@ export default function OurTable({
 //       Header: 'Name',
 //       accessor: 'name',
 //   },
-//   ButtonColumn("Edit", "primary", editCallback),
-//   ButtonColumn("Delete", "danger", deleteCallback)
+//   ButtonColumn("Edit", "Edit","primary", editCallback),
+//   ButtonColumn("Delete", "Delete", "danger", deleteCallback)
 // ];
 
-export function ButtonColumn(label, variant, callback, testid) {
+export function ButtonColumn(label, celltext, variant, callback, testid) {
   const column = {
     Header: label,
     id: label,
@@ -104,7 +104,7 @@ export function ButtonColumn(label, variant, callback, testid) {
         onClick={() => callback(cell)}
         data-testid={`${testid}-cell-row-${cell.row.index}-col-${cell.column.id}-button`}
       >
-        {label}
+        {celltext}
       </Button>
     ),
   };

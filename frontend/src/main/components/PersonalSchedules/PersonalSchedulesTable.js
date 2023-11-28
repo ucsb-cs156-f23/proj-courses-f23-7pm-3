@@ -59,12 +59,13 @@ export default function PersonalSchedulesTable({
     ...columns,
     ButtonColumn(
       "Details",
+      "Details",
       "primary",
       detailsCallback,
       "PersonalSchedulesTable",
     ),
-    ButtonColumn("Edit", "primary", editCallback, "PersonalSchedulesTable"),
-    ButtonColumn("Delete", "danger", deleteCallback, "PersonalSchedulesTable"),
+    ButtonColumn("Edit", "Edit", "primary", editCallback, "PersonalSchedulesTable"),
+    ButtonColumn("Delete", "Delete", "danger", deleteCallback, "PersonalSchedulesTable"),
   ];
 
   const columnsToDisplay = showButtons ? buttonColumns : columns;

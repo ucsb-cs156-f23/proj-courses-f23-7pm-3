@@ -58,8 +58,8 @@ export default function UCSBSubjectsTable({ subjects, currentUser }) {
 
   const columnsIfAdmin = [
     ...columns,
-    ButtonColumn("Edit", "primary", editCallback, "UCSBSubjectsTable"),
-    ButtonColumn("Delete", "danger", deleteCallback, "UCSBSubjectsTable"),
+    ButtonColumn("Edit", "Edit", "primary", editCallback, "UCSBSubjectsTable"),
+    ButtonColumn("Delete", "Delete", "danger", deleteCallback, "UCSBSubjectsTable"),
   ];
 
   const columnsToDisplay = hasRole(currentUser, "ROLE_ADMIN")

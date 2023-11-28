@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, waitFor, screen } from "@testing-library/react";
 import {
   fiveSections,
   sixSections,
@@ -151,6 +151,9 @@ describe("Section tests", () => {
     expect(
       screen.getByTestId(`${testId}-cell-row-0-col-courseInfo.courseId`),
     ).toHaveTextContent("CMPSC 130A");
+    const infoButton = screen.queryByTestId(`${testId}-cell-row-0-col-Info-button`);
+    expect(infoButton).toBeInTheDocument();
+    expect(infoButton).toHaveClass("btn-primary");
     expect(
       screen.getByTestId(`${testId}-cell-row-0-col-courseInfo.courseId`),
     ).not.toHaveTextContent("CMPSC 130A -1");
@@ -181,6 +184,30 @@ describe("Section tests", () => {
     expect(
       screen.getByTestId(`${testId}-cell-row-0-col-section.enrollCode`),
     ).toHaveTextContent("08078");
+  });
+
+  test("Edit button navigates to the edit page for admin user", async () => {
+    render(
+      <QueryClientProvider client={queryClient}>
+        <MemoryRouter>
+          <SectionsOverTimeTable sections={sixSections} />
+        </MemoryRouter>
+      </QueryClientProvider>,
+    );
+
+    const testId = "SectionsOverTimeTable";
+
+    expect(
+      screen.getByTestId(`${testId}-cell-row-0-col-courseInfo.courseId`),
+    ).toHaveTextContent("CMPSC 130A");
+
+    const infoButton = screen.getByTestId(`${testId}-cell-row-0-col-Info-button`);
+    expect(infoButton).toBeInTheDocument();
+    
+    fireEvent.click(infoButton);
+
+    await waitFor(() => expect(mockedNavigate).toHaveBeenCalledWith('/coursedetails/'));
+
   });
 
   test("Correctly groups separate quarters of the same class", async () => {
@@ -234,6 +261,7 @@ describe("Section tests", () => {
       screen.getByTestId(`${testId}-cell-row-2-col-enrolled`),
     ).toHaveTextContent("21/21");
   });
+  
   test("Sections have appropriate status columns", () => {
     render(
       <QueryClientProvider client={queryClient}>
