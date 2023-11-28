@@ -61,7 +61,6 @@ export default function SectionsOverTimeTable({ sections }) {
     },
     {
       Header: "Info",
-      id: "Info",
       Cell: ({ cell }) => (
         <Button
           variant={"primary"}

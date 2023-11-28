@@ -54,7 +54,6 @@ export default function SectionsTable({ sections }) {
     },
     {
       Header: "Info",
-      id: "Info",
       Cell: ({ cell }) => (
         <Button
           variant={"primary"}
