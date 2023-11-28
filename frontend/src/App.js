@@ -5,7 +5,7 @@ import AdminUsersPage from "main/pages/AdminUsersPage";
 import AdminLoadSubjectsPage from "main/pages/AdminLoadSubjectsPage";
 import AdminPersonalSchedulesPage from "main/pages/AdminPersonalSchedulePage";
 import AdminJobsPage from "main/pages/AdminJobsPage";
-import CourseDetailsPage from "main/pages/CourseDetailsPage"
+import CourseDetailsPage from "main/pages/CourseDetails/CourseDetailsPage";
 
 import { hasRole, useCurrentUser } from "main/utils/currentUser";
 
