@@ -1,4 +1,5 @@
 import SectionsOverTimeTableBase from "main/components/SectionsOverTimeTableBase";
+import { Button } from "react-bootstrap";
 
 import { yyyyqToQyy } from "main/utils/quarterUtilities.js";
 import {
@@ -22,6 +23,7 @@ function getCourseId(courseIds) {
 }
 
 export default function SectionsOverTimeTable({ sections }) {
+
   // Stryker enable all
   // Stryker disable BooleanLiteral
   const columns = [
@@ -57,6 +59,18 @@ export default function SectionsOverTimeTable({ sections }) {
       accessor: (row) => isSection(row.section.section),
       // Stryker disable next-line StringLiteral: this column is hidden, very hard to test
       id: "isSection",
+    },
+    {
+      Header: "Info",
+      id: "Info",
+      Cell: ({ cell }) => (
+        <Button
+          variant={"primary"}
+          data-testid={`${testid}-cell-row-${cell.row.index}-col-${cell.column.id}-button`}
+        >
+          {"ℹ"}
+        </Button>
+      ),
     },
     {
       Header: "Status",
