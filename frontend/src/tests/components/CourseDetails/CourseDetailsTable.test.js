@@ -33,8 +33,28 @@ describe("CourseTable tests", () => {
       </QueryClientProvider>,
     );
 
-    const expectedHeaders = ["Quarter", "Enrollment Code", "Course Id", "Title", "Enrolled", "Location", "Days", "Time", "Instructor"];
-    const expectedFields = ["quarter", "enrollmentCode", "courseId", "title", "enrolled", "location", "days", "time", "instructor"];
+    const expectedHeaders = [
+      "Quarter",
+      "Enrollment Code",
+      "Course Id",
+      "Title",
+      "Enrolled",
+      "Location",
+      "Days",
+      "Time",
+      "Instructor",
+    ];
+    const expectedFields = [
+      "quarter",
+      "enrollmentCode",
+      "courseId",
+      "title",
+      "enrolled",
+      "location",
+      "days",
+      "time",
+      "instructor",
+    ];
     const testId = "CourseDetailsTable";
 
     expectedHeaders.forEach((headerText) => {
