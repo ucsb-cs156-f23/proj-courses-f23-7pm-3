@@ -1,4 +1,4 @@
-import { fireEvent, render, waitFor, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import {
   fiveSections,
   sixSections,
@@ -151,7 +151,9 @@ describe("Section tests", () => {
     expect(
       screen.getByTestId(`${testId}-cell-row-0-col-courseInfo.courseId`),
     ).toHaveTextContent("CMPSC 130A");
-    const infoButton = screen.queryByTestId(`${testId}-cell-row-0-col-Info-button`);
+    const infoButton = screen.queryByTestId(
+      `${testId}-cell-row-0-col-Info-button`,
+    );
     expect(infoButton).toBeInTheDocument();
     expect(infoButton).toHaveClass("btn-primary");
     expect(
