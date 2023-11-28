@@ -13,7 +13,7 @@ export default function CourseDetailsTable({ courses }) {
     {
       Header: "Enrollment Code",
       accessor: "enrollmentCode",
-    }
+    },
   ];
 
   return (
