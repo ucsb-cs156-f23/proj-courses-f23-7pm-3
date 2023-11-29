@@ -45,16 +45,19 @@ describe("CourseForm tests", () => {
   });
 
   test("Correct Error messages on missing input", async () => {
+    const mockSubmitAction = jest.fn();
+    
     render(
       <QueryClientProvider client={queryClient}>
         <Router>
-          <CourseForm />
+          <CourseForm submitAction={mockSubmitAction} />
         </Router>,
       </QueryClientProvider>
     );
     expect(await screen.findByTestId("CourseForm-submit")).toBeInTheDocument();
     const submitButton = screen.getByTestId("CourseForm-submit");
 
+    localStorage.setItem("CourseForm-psId", 13);
     fireEvent.click(submitButton);
 
     expect(
@@ -74,11 +77,10 @@ describe("CourseForm tests", () => {
 
     expect(await screen.findByTestId("CourseForm-psId")).toBeInTheDocument();
 
-    const psId = screen.getByTestId("CourseForm-psId");
     const enrollCd = screen.getByTestId("CourseForm-enrollCd");
     const submitButton = screen.getByTestId("CourseForm-submit");
 
-    fireEvent.change(psId, { target: { value: 13 } });
+    localStorage.setItem("CourseForm-psId", 13);
     fireEvent.change(enrollCd, { target: { value: "20124" } });
     fireEvent.click(submitButton);
 
