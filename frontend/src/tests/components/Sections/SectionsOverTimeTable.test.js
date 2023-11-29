@@ -161,6 +161,9 @@ describe("Section tests", () => {
     expect(infoButton).toBeInTheDocument();
     expect(infoButton).toHaveClass("btn-primary");
     expect(
+      screen.getByTestId(`${testId}-cell-row-0-col-Info-button`),
+    ).toHaveTextContent("ℹ");
+    expect(
       screen.getByTestId(`${testId}-cell-row-0-col-courseInfo.courseId`),
     ).not.toHaveTextContent("CMPSC 130A -1");
     expect(
