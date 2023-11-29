@@ -1,11 +1,10 @@
-import { React, useState } from "react";
+import { React } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import PersonalScheduleDropdown from "../PersonalSchedules/PersonalScheduleDropdown";
-import { useBackend } from "main/utils/useBackend";
 
-function CourseForm({ initialCourse, submitAction, buttonLabel = "Create" }) {
+function CourseForm({ initialCourse, submitAction, buttonLabel = "Create", schedules, schedule, setSchedule, onScheduleChange }) {
   // Stryker disable all
   const {
     register,
@@ -14,27 +13,10 @@ function CourseForm({ initialCourse, submitAction, buttonLabel = "Create" }) {
   } = useForm({ defaultValues: initialCourse || {} });
   // Stryker enable all
 
-  const {
-    data: schedules,
-    error: _error,
-    status: _status,
-  } = useBackend(
-    // Stryker disable next-line all : don't test internal caching of React Query
-    ["/api/personalschedules/all"],
-    { method: "GET", url: "/api/personalschedules/all" },
-    [],
-  );
-
   const navigate = useNavigate();
 
-  // Stryker disable all : not sure how to test/mock local storage
-  const localSchedule = localStorage.getItem("CourseForm-psId");
-
-  // How does this work? it comes from BasicCourseSearchForm.js but it's important
-  const [schedule, setSchedule] = useState(localSchedule || "");
-
   return (
-    <Form onSubmit={handleSubmit(submitAction)}>
+    <Form onSubmit={handleSubmit(submitAction)}> 
       {initialCourse && (
         <Form.Group className="mb-3">
           <Form.Label htmlFor="id">Id</Form.Label>
@@ -71,6 +53,7 @@ function CourseForm({ initialCourse, submitAction, buttonLabel = "Create" }) {
           schedule={schedule}
           setSchedule={setSchedule}
           controlId={"CourseForm-psId"}
+          onChange={onScheduleChange}
         />
       </Form.Group>
 

@@ -10,12 +10,8 @@ const PersonalScheduleDropdown = ({
   onChange = null,
   label = "Schedule",
 }) => {
-  const localSearchSchedule = localStorage.getItem(controlId);
 
-  const [scheduleState, setScheduleState] = useState(
-    // Stryker disable next-line all : not sure how to test/mock local storage
-    localSearchSchedule || schedule,
-  );
+  const [scheduleState, setScheduleState] = useState(schedule);
 
   const handleScheduleOnChange = (event) => {
     const selectedSchedule = event.target.value;
