@@ -16,7 +16,6 @@ function CourseForm({ initialCourse, submitAction, buttonLabel = "Create" }) {
 
   const navigate = useNavigate();
 
-  // // Stryker disable all : not sure how to test/mock local storage
   const localSchedule = localStorage.getItem("CourseForm-psId");
 
   const {
