@@ -33,6 +33,17 @@ function CourseForm({ initialCourse, submitAction, buttonLabel = "Create" }) {
   // How does this work? it comes from BasicCourseSearchForm.js but it's important
   const [schedule, setSchedule] = useState(localSchedule || "");
 
+  const onScheduleChange = (event) => {
+    setSchedule(event.target.value);
+  }
+
+  if(schedule) {
+    localStorage.setItem("CourseForm-psId", schedule);
+  }
+  else if(schedules[0]) {
+    setSchedule(schedules[0].id);
+  }
+
   return (
     <Form onSubmit={handleSubmit(submitAction)}>
       {initialCourse && (
@@ -71,6 +82,7 @@ function CourseForm({ initialCourse, submitAction, buttonLabel = "Create" }) {
           schedule={schedule}
           setSchedule={setSchedule}
           controlId={"CourseForm-psId"}
+          onChange={onScheduleChange}
         />
       </Form.Group>
 
