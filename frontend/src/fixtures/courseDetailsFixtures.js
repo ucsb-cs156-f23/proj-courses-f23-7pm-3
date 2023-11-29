@@ -1,7 +1,7 @@
 const courseDetailsFixtures = {
   twoCourses: [
     {
-      quarter: "20231",
+      quarter: "20211",
       enrollmentCode: "12345",
       courseId: "CMPSC 111",
       title: "Intro to Computational Science",

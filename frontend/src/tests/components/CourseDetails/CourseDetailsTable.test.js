@@ -69,7 +69,7 @@ describe("CourseTable tests", () => {
 
     expect(
       screen.getByTestId(`${testId}-cell-row-0-col-quarter`),
-    ).toHaveTextContent("W23");
+    ).toHaveTextContent("W21");
     expect(
       screen.getByTestId(`${testId}-cell-row-1-col-enrollmentCode`),
     ).toHaveTextContent("23456");
