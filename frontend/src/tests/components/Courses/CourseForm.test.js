@@ -21,8 +21,9 @@ describe("CourseForm tests", () => {
       <QueryClientProvider client={queryClient}>
         <Router>
           <CourseForm />
-        </Router>,
-      </QueryClientProvider>
+        </Router>
+        ,
+      </QueryClientProvider>,
     );
 
     expect(await screen.findByText(/Schedule/)).toBeInTheDocument();
@@ -35,8 +36,9 @@ describe("CourseForm tests", () => {
       <QueryClientProvider client={queryClient}>
         <Router>
           <CourseForm initialCourse={coursesFixtures.oneCourse} />
-        </Router>,
-      </QueryClientProvider>
+        </Router>
+        ,
+      </QueryClientProvider>,
     );
 
     expect(await screen.findByTestId(/CourseForm-id/)).toBeInTheDocument();
@@ -46,13 +48,14 @@ describe("CourseForm tests", () => {
 
   test("Correct Error messages on missing input", async () => {
     const mockSubmitAction = jest.fn();
-    
+
     render(
       <QueryClientProvider client={queryClient}>
         <Router>
           <CourseForm submitAction={mockSubmitAction} />
-        </Router>,
-      </QueryClientProvider>
+        </Router>
+        ,
+      </QueryClientProvider>,
     );
     expect(await screen.findByTestId("CourseForm-submit")).toBeInTheDocument();
     const submitButton = screen.getByTestId("CourseForm-submit");
@@ -60,7 +63,9 @@ describe("CourseForm tests", () => {
     localStorage.setItem("CourseForm-psId", 13);
     fireEvent.click(submitButton);
 
-    expect(await screen.getByText(/Enroll Code is required./)).toBeInTheDocument();
+    expect(
+      await screen.findByText(/Enroll Code is required./),
+    ).toBeInTheDocument();
   });
 
   test("No Error messages on good input", async () => {
@@ -70,8 +75,9 @@ describe("CourseForm tests", () => {
       <QueryClientProvider client={queryClient}>
         <Router>
           <CourseForm submitAction={mockSubmitAction} />
-        </Router>,
-      </QueryClientProvider>
+        </Router>
+        ,
+      </QueryClientProvider>,
     );
 
     expect(await screen.findByTestId("CourseForm-psId")).toBeInTheDocument();
@@ -86,12 +92,10 @@ describe("CourseForm tests", () => {
     await waitFor(() => expect(mockSubmitAction).toHaveBeenCalled());
 
     expect(
-      screen.queryByText(/Personal Schedule ID is required./),
-    ).not.toBeInTheDocument();
-    expect(
       screen.queryByText(/Enroll Code is required./),
     ).not.toBeInTheDocument();
     expect(enrollCd).toHaveValue("20124");
+    expect(localStorage.getItem("CourseForm-psId")).toEqual("13");
   });
 
   test("that navigate(-1) is called when Cancel is clicked", async () => {
@@ -99,8 +103,9 @@ describe("CourseForm tests", () => {
       <QueryClientProvider client={queryClient}>
         <Router>
           <CourseForm />
-        </Router>,
-      </QueryClientProvider>
+        </Router>
+        ,
+      </QueryClientProvider>,
     );
     expect(await screen.findByTestId("CourseForm-cancel")).toBeInTheDocument();
     const cancelButton = screen.getByTestId("CourseForm-cancel");

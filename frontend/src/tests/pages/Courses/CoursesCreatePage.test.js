@@ -74,13 +74,18 @@ describe("CoursesCreatePage tests", () => {
       </QueryClientProvider>,
     );
 
-    expect(await screen.findByTestId("CourseForm-enrollCd")).toBeInTheDocument();
+    expect(
+      await screen.findByTestId("CourseForm-enrollCd"),
+    ).toBeInTheDocument();
 
+    const psIdField = document.querySelector("#CourseForm-psId");
     const enrollCdField = screen.getByTestId("CourseForm-enrollCd");
     const submitButton = screen.getByTestId("CourseForm-submit");
 
-    localStorage.setItem("CourseForm-psId", 13);
+    fireEvent.change(psIdField, { target: { value: 13 } });
     fireEvent.change(enrollCdField, { target: { value: "08250" } });
+
+    localStorage.setItem("CourseForm-psId", 13);
 
     expect(submitButton).toBeInTheDocument();
 
@@ -113,7 +118,9 @@ describe("CoursesCreatePage tests", () => {
       </QueryClientProvider>,
     );
 
-    expect(await screen.findByTestId("CourseForm-enrollCd")).toBeInTheDocument();
+    expect(
+      await screen.findByTestId("CourseForm-enrollCd"),
+    ).toBeInTheDocument();
 
     const enrollCdField = screen.getByTestId("CourseForm-enrollCd");
     const submitButton = screen.getByTestId("CourseForm-submit");

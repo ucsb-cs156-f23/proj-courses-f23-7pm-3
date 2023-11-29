@@ -14,6 +14,11 @@ function CourseForm({ initialCourse, submitAction, buttonLabel = "Create" }) {
   } = useForm({ defaultValues: initialCourse || {} });
   // Stryker enable all
 
+  const navigate = useNavigate();
+
+  // // Stryker disable all : not sure how to test/mock local storage
+  const localSchedule = localStorage.getItem("CourseForm-psId");
+
   const {
     data: schedules,
     error: _error,
@@ -25,24 +30,16 @@ function CourseForm({ initialCourse, submitAction, buttonLabel = "Create" }) {
     [],
   );
 
-  const navigate = useNavigate();
-
-  // Stryker disable all : not sure how to test/mock local storage
-  const localSchedule = localStorage.getItem("CourseForm-psId");
-
-  // How does this work? it comes from BasicCourseSearchForm.js but it's important
+  // // How does this work? it comes from BasicCourseSearchForm.js but it's important
   const [schedule, setSchedule] = useState(localSchedule || "");
+
+  if (schedule) {
+    localStorage.setItem("CourseForm-psId", schedule);
+  }
 
   const onScheduleChange = (event) => {
     setSchedule(event.target.value);
-  }
-
-  if(schedule) {
-    localStorage.setItem("CourseForm-psId", schedule);
-  }
-  else if(schedules[0]) {
-    setSchedule(schedules[0].id);
-  }
+  };
 
   return (
     <Form onSubmit={handleSubmit(submitAction)}>
