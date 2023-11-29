@@ -60,8 +60,7 @@ describe("CourseForm tests", () => {
     localStorage.setItem("CourseForm-psId", 13);
     fireEvent.click(submitButton);
 
-    expect(
-      await expect(screen.getByText(/Enroll Code is required./))).toBeInTheDocument();
+    expect(await screen.getByText(/Enroll Code is required./)).toBeInTheDocument();
   });
 
   test("No Error messages on good input", async () => {
