@@ -2,17 +2,17 @@ const courseDetailsFixtures = {
   twoCourses: [
     {
       quarter: "20211",
-      enrollmentCode: "ABC123",
+      enrollmentCode: "12345",
     },
     {
       quarter: "20223",
-      enrollmentCode: "CDF456",
+      enrollmentCode: "23456",
     },
   ],
   oneCourse: [
     {
       quarter: "20211",
-      enrollmentCode: "ABC123",
+      enrollmentCode: "01234",
     },
   ],
 };
