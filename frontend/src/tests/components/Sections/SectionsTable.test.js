@@ -149,7 +149,7 @@ describe("Section tests", () => {
     );
     expect(infoButton).toBeInTheDocument();
     expect(infoButton).toHaveClass("btn-primary");
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-Info-button`),)
+    expect(screen.getByTestId(`${testId}-cell-row-0-col-Info-button`));
     expect(
       screen.getByTestId(`${testId}-cell-row-0-col-courseInfo.title`),
     ).toHaveTextContent("COMP ENGR SEMINAR");
