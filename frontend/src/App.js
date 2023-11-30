@@ -5,6 +5,7 @@ import AdminUsersPage from "main/pages/AdminUsersPage";
 import AdminLoadSubjectsPage from "main/pages/AdminLoadSubjectsPage";
 import AdminPersonalSchedulesPage from "main/pages/AdminPersonalSchedulePage";
 import AdminJobsPage from "main/pages/AdminJobsPage";
+import CourseDetailsPage from "main/pages/CourseDetails/CourseDetailsPage";
 
 import { hasRole, useCurrentUser } from "main/utils/currentUser";
 
@@ -99,6 +100,11 @@ function App() {
           exact
           path="/courseovertime/instructorsearch"
           element={<CourseOverTimeInstructorIndexPage />}
+        />
+        <Route
+          exact
+          path="/coursedetails/:yyyyq/:enrollCd"
+          element={<CourseDetailsPage />}
         />
       </Routes>
     </BrowserRouter>
