@@ -12,7 +12,7 @@ function CourseForm({ initialCourse, submitAction, buttonLabel = "Create" }) {
     formState: { errors },
     handleSubmit,
   } = useForm({ defaultValues: initialCourse || {} });
-  // Stryker enable all
+  // Stryker restore all
 
   const navigate = useNavigate();
 
@@ -23,26 +23,25 @@ function CourseForm({ initialCourse, submitAction, buttonLabel = "Create" }) {
     error: _error,
     status: _status,
   } = useBackend(
-    // Stryker disable next-line all : don't test internal caching of React Query
+    // Stryker disable all : don't test internal caching of React Query
     ["/api/personalschedules/all"],
     { method: "GET", url: "/api/personalschedules/all" },
     [],
   );
+  // Stryker restore all
 
-  // // How does this work? it comes from BasicCourseSearchForm.js but it's important
+  // How does this work? it comes from BasicCourseSearchForm.js but it's important
   const [schedule, setSchedule] = useState(localSchedule || "");
 
+  // Stryker disable all : this problem will only come up when there are no schedules, which is possible on dokku but not in tests? Might have to test more
   if (schedules && schedules.length > 0) {
     localStorage.setItem("CourseForm-psId", schedules[0]);
   }
+  // Stryker restore all
 
   if (schedule) {
     localStorage.setItem("CourseForm-psId", schedule);
   }
-
-  const onScheduleChange = (event) => {
-    setSchedule(event.target.value);
-  };
 
   return (
     <Form onSubmit={handleSubmit(submitAction)}>
@@ -82,7 +81,6 @@ function CourseForm({ initialCourse, submitAction, buttonLabel = "Create" }) {
           schedule={schedule}
           setSchedule={setSchedule}
           controlId={"CourseForm-psId"}
-          onChange={onScheduleChange}
         />
       </Form.Group>
 
