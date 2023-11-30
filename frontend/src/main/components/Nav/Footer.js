@@ -65,7 +65,7 @@ export default function Footer(systemInfo) {
         <p>
           The cartoon Storke Tower images in the brand logo and favicon for this
           site were developed by Chelsea Lyon-Hayden, Art Director for UCSB
-          Associate Students, and are used here by permission of the Executive
+          Associated Students, and are used here by permission of the Executive
           Director of UCSB Associated Students. These images are Copyright ©
           2021 UCSB Associated Students, and may not be reused without express
           written permission of the Executive Director of UCSB Associated
