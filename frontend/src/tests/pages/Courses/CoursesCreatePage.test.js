@@ -109,21 +109,16 @@ describe("CoursesCreatePage tests", () => {
 
   test("If there is an available schedule in personalschedules, we update our local schedule too", async () => {
     const queryClient = new QueryClient();
-    // const schedules = [{
-    //   id: "13",
-    //   name: "Schedule-1-F23",
-    //   description: "Fall 2023 test schedule",
-    //   quarter: "F23",
-    // }];
-    //Copied from PersonalSchedulesDetailsPage test
-    axiosMock.onGet("/api/personalschedules/all").reply(200, [
+    const schedules = [
       {
-        id: 13,
+        id: "13",
         name: "Schedule-1-F23",
         description: "Fall 2023 test schedule",
         quarter: "F23",
       },
-    ]);
+    ];
+    //Copied from PersonalSchedulesDetailsPage test
+    axiosMock.onGet("/api/personalschedules/all").reply(200, schedules);
 
     render(
       <QueryClientProvider client={queryClient}>

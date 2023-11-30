@@ -33,6 +33,8 @@ function CourseForm({ initialCourse, submitAction, buttonLabel = "Create" }) {
   // How does this work? it comes from BasicCourseSearchForm.js but it's important
   const [schedule, setSchedule] = useState(localSchedule || "");
 
+  // PROBLEM: Adding a "!localSchedule" to the if statement means it never gets covered in coverage tests
+  // However, not adding it means that we have to make two schedules before adding a course
   // Stryker disable all : this problem will only come up when there are no schedules, which is possible on dokku but not in tests? Might have to test more
   if (schedules && schedules.length > 0) {
     localStorage.setItem("CourseForm-psId", schedules[0]);
