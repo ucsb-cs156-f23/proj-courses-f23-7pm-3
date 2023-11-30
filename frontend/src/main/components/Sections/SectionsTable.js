@@ -1,7 +1,7 @@
 import SectionsTableBase from "main/components/SectionsTableBase";
 import { Button } from "react-bootstrap";
-
-import { yyyyqToQyy } from "main/utils/quarterUtilities.js";
+import { useNavigate } from "react-router-dom";
+import { yyyyqToQyy, qyyToYyyyq } from "main/utils/quarterUtilities.js";
 import {
   convertToFraction,
   formatDays,
@@ -19,6 +19,16 @@ function getFirstVal(values) {
 }
 
 export default function SectionsTable({ sections }) {
+  const navigate = useNavigate();
+
+  // Stryker disable next-line all : TODO try to make a good test for this
+  const infoCallback = (cell) => {
+    navigate(
+      `/coursedetails/${qyyToYyyyq(cell.row.values.quarter)}/${
+        cell.row.values["section.enrollCode"]
+      }`,
+    );
+  };
   // Stryker enable all
   // Stryker disable BooleanLiteral
   const columns = [
@@ -57,6 +67,7 @@ export default function SectionsTable({ sections }) {
       Cell: ({ cell }) => (
         <Button
           variant={"primary"}
+          onClick={() => infoCallback(cell)}
           data-testid={`${testid}-cell-row-${cell.row.index}-col-${cell.column.id}-button`}
         >
           {"ℹ"}

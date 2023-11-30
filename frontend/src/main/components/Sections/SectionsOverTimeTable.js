@@ -1,7 +1,7 @@
 import SectionsOverTimeTableBase from "main/components/SectionsOverTimeTableBase";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { yyyyqToQyy } from "main/utils/quarterUtilities.js";
+import { yyyyqToQyy, qyyToYyyyq } from "main/utils/quarterUtilities.js";
 import {
   convertToFraction,
   formatDays,
@@ -23,12 +23,15 @@ function getCourseId(courseIds) {
 }
 
 export default function SectionsOverTimeTable({ sections }) {
-  console.log(sections);
   const navigate = useNavigate();
 
   // Stryker disable next-line all : TODO try to make a good test for this
-  const infoCallback = (row) => {
-    navigate(`/coursedetails/${row.courseInfo.quarter}/${row.section.enrollCode}`);
+  const infoCallback = (cell) => {
+    navigate(
+      `/coursedetails/${qyyToYyyyq(cell.row.values.quarter)}/${
+        cell.row.values["section.enrollCode"]
+      }`,
+    );
   };
   // Stryker enable all
   // Stryker disable BooleanLiteral
@@ -68,13 +71,10 @@ export default function SectionsOverTimeTable({ sections }) {
     },
     {
       Header: "Info",
-      accessor: (row) => {
-        console.log(row.courseInfo.quarter);
-      },
       Cell: ({ cell }) => (
         <Button
           variant={"primary"}
-          onClick={(row) => infoCallback(row)}
+          onClick={() => infoCallback(cell)}
           data-testid={`${testid}-cell-row-${cell.row.index}-col-${cell.column.id}-button`}
         >
           {"ℹ"}
