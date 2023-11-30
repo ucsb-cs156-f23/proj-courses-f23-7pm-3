@@ -37,7 +37,7 @@ function CourseForm({ initialCourse, submitAction, buttonLabel = "Create" }) {
   // However, not adding it means that we have to make two schedules before adding a course
   // Stryker disable all : this problem will only come up when there are no schedules, which is possible on dokku but not in tests? Might have to test more
   if (schedules && schedules.length > 0) {
-    localStorage.setItem("CourseForm-psId", schedules[0]);
+    localStorage.setItem("CourseForm-psId", schedules[0].id);
   }
   // Stryker restore all
 
