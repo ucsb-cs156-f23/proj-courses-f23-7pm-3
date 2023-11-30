@@ -74,14 +74,18 @@ describe("CoursesCreatePage tests", () => {
       </QueryClientProvider>,
     );
 
-    expect(await screen.findByTestId("CourseForm-psId")).toBeInTheDocument();
+    expect(
+      await screen.findByTestId("CourseForm-enrollCd"),
+    ).toBeInTheDocument();
 
-    const psIdField = screen.getByTestId("CourseForm-psId");
+    const psIdField = document.querySelector("#CourseForm-psId");
     const enrollCdField = screen.getByTestId("CourseForm-enrollCd");
     const submitButton = screen.getByTestId("CourseForm-submit");
 
     fireEvent.change(psIdField, { target: { value: 13 } });
     fireEvent.change(enrollCdField, { target: { value: "08250" } });
+
+    localStorage.setItem("CourseForm-psId", 13);
 
     expect(submitButton).toBeInTheDocument();
 
@@ -103,6 +107,33 @@ describe("CoursesCreatePage tests", () => {
     expect(mockNavigate).toBeCalledWith({ to: "/courses/list" });
   });
 
+  test("If there is an available schedule in personalschedules, we update our local schedule too", async () => {
+    const queryClient = new QueryClient();
+    const schedules = [
+      {
+        id: "13",
+        name: "Schedule-1-F23",
+        description: "Fall 2023 test schedule",
+        quarter: "F23",
+      },
+    ];
+    //Copied from PersonalSchedulesDetailsPage test
+    axiosMock.onGet("/api/personalschedules/all").reply(200, schedules);
+
+    render(
+      <QueryClientProvider client={queryClient}>
+        <MemoryRouter>
+          <CoursesCreatePage />
+        </MemoryRouter>
+      </QueryClientProvider>,
+    );
+
+    expect(
+      await screen.findByTestId("CourseForm-enrollCd"),
+    ).toBeInTheDocument();
+    expect(localStorage.getItem("CourseForm-psId")).toEqual("13");
+  });
+
   test("when you input incorrect information, we get an error", async () => {
     const queryClient = new QueryClient();
 
@@ -114,13 +145,14 @@ describe("CoursesCreatePage tests", () => {
       </QueryClientProvider>,
     );
 
-    expect(await screen.findByTestId("CourseForm-psId")).toBeInTheDocument();
+    expect(
+      await screen.findByTestId("CourseForm-enrollCd"),
+    ).toBeInTheDocument();
 
-    const psIdField = screen.getByTestId("CourseForm-psId");
     const enrollCdField = screen.getByTestId("CourseForm-enrollCd");
     const submitButton = screen.getByTestId("CourseForm-submit");
 
-    fireEvent.change(psIdField, { target: { value: 13 } });
+    localStorage.setItem("CourseForm-psId", 13);
     fireEvent.change(enrollCdField, { target: { value: "99881" } });
 
     expect(submitButton).toBeInTheDocument();
