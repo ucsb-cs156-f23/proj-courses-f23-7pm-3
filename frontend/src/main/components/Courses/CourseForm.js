@@ -36,8 +36,8 @@ function CourseForm({ initialCourse, submitAction, buttonLabel = "Create" }) {
 
   // PROBLEM: Adding a "!localSchedule" to the if statement means it never gets covered in coverage tests
   // However, not adding it means that we have to make two schedules before adding a course
-  
-   if (schedules && schedules.length > 0) {
+
+  if (schedules && schedules.length > 0) {
     localStorage.setItem("CourseForm-psId", schedules[0].id);
   }
 
