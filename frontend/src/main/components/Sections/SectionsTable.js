@@ -30,7 +30,6 @@ export default function SectionsTable({ sections }) {
     );
   };
   // Stryker enable all
-  // Stryker disable BooleanLiteral
   const columns = [
     {
       Header: "Quarter",
