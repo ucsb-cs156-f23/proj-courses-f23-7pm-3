@@ -229,7 +229,7 @@ describe("CourseDetailsPage tests", () => {
       instructor: "P Conrad",
       },
     ]);
-
+    
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>

@@ -144,6 +144,14 @@ describe("Section tests", () => {
     expect(
       screen.getByTestId(`${testId}-cell-row-0-col-courseInfo.courseId`),
     ).toHaveTextContent("ECE 1A");
+    const infoButton = screen.queryByTestId(
+      `${testId}-cell-row-0-col-Info-button`,
+    );
+    expect(infoButton).toBeInTheDocument();
+    expect(infoButton).toHaveClass("btn-primary");
+    expect(
+      screen.getByTestId(`${testId}-cell-row-0-col-Info-button`),
+    ).toHaveTextContent("ℹ");
     expect(
       screen.getByTestId(`${testId}-cell-row-0-col-courseInfo.title`),
     ).toHaveTextContent("COMP ENGR SEMINAR");
