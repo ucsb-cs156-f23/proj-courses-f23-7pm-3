@@ -1,9 +1,18 @@
 import React from "react";
 import OurTable from "main/components/OurTable";
+import {
+  convertToFraction,
+  formatInstructors,
+  formatLocation,
+  formatTime,
+} from "main/utils/sectionUtils.js";
 
 import { yyyyqToQyy } from "main/utils/quarterUtilities.js";
 
 export default function CourseDetailsTable({ courses }) {
+
+  console.log(courses);
+
   const columns = [
     {
       Header: "Quarter",
@@ -11,12 +20,16 @@ export default function CourseDetailsTable({ courses }) {
       id: "quarter",
     },
     {
-      Header: "Enrollment Code",
-      accessor: "enrollmentCode",
+      Header: "Course ID",
+      accessor: "courseId",
     },
     {
-      Header: "Course Id",
-      accessor: "courseId",
+      Header: "Enroll Code",
+      accessor: "classSections[0].enrollCode",
+    },
+    {
+      Header: "Section",
+      accessor: "classSections[0].section",
     },
     {
       Header: "Title",
@@ -24,23 +37,31 @@ export default function CourseDetailsTable({ courses }) {
     },
     {
       Header: "Enrolled",
-      accessor: "enrolled",
+      accessor: (row) =>
+        convertToFraction(
+          row.classSections[0].enrolledTotal,
+          row.classSections[0].maxEnroll,
+        ),
+      id: "enrolled",
     },
     {
       Header: "Location",
-      accessor: "location",
+      accessor: (row) => formatLocation(row.classSections[0].timeLocations),
+      id: "location",
     },
     {
       Header: "Days",
-      accessor: "days",
+      accessor: "classSections[0].timeLocations[0].days",
     },
     {
       Header: "Time",
-      accessor: "time",
+      accessor: (row) => formatTime(row.classSections[0].timeLocations),
+      id: "time",
     },
     {
       Header: "Instructor",
-      accessor: "instructor",
+      accessor: (row) => formatInstructors(row.classSections[0].instructors),
+      id: "instructor",
     },
   ];
 
