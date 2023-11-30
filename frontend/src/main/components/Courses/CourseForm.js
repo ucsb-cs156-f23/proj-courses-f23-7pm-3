@@ -32,6 +32,10 @@ function CourseForm({ initialCourse, submitAction, buttonLabel = "Create" }) {
   // // How does this work? it comes from BasicCourseSearchForm.js but it's important
   const [schedule, setSchedule] = useState(localSchedule || "");
 
+  if (schedules && schedules.length > 0) {
+    localStorage.setItem("CourseForm-psId", schedules[0]);
+  }
+
   if (schedule) {
     localStorage.setItem("CourseForm-psId", schedule);
   }
