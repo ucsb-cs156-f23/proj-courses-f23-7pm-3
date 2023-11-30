@@ -38,7 +38,6 @@ export default function SectionsOverTimeTable({ sections }) {
     {
       Header: "Quarter",
       accessor: (row) => yyyyqToQyy(row.courseInfo.quarter),
-      disableGroupBy: true,
       id: "quarter",
 
       Cell: ({ cell: { value } }) => value,
@@ -46,8 +45,6 @@ export default function SectionsOverTimeTable({ sections }) {
     {
       Header: "Course ID",
       accessor: "courseInfo.courseId",
-      disableGroupBy: true,
-
       aggregate: getCourseId,
       Aggregated: ({ cell: { value } }) => `${value}`,
 
@@ -56,8 +53,6 @@ export default function SectionsOverTimeTable({ sections }) {
     {
       Header: "Title",
       accessor: "courseInfo.title",
-      disableGroupBy: true,
-
       aggregate: getFirstVal,
       Aggregated: ({ cell: { value } }) => `${value}`,
     },
@@ -88,7 +83,6 @@ export default function SectionsOverTimeTable({ sections }) {
         else if (isSectionFull(row.section)) return "FULL";
         else return "OPEN";
       },
-      disableGroupBy: true,
       id: "status",
 
       aggregate: getFirstVal,
@@ -98,7 +92,6 @@ export default function SectionsOverTimeTable({ sections }) {
       Header: "Enrolled",
       accessor: (row) =>
         convertToFraction(row.section.enrolledTotal, row.section.maxEnroll),
-      disableGroupBy: true,
       id: "enrolled",
 
       aggregate: getFirstVal,
@@ -107,7 +100,6 @@ export default function SectionsOverTimeTable({ sections }) {
     {
       Header: "Location",
       accessor: (row) => formatLocation(row.section.timeLocations),
-      disableGroupBy: true,
       id: "location",
 
       aggregate: getFirstVal,
@@ -116,7 +108,6 @@ export default function SectionsOverTimeTable({ sections }) {
     {
       Header: "Days",
       accessor: (row) => formatDays(row.section.timeLocations),
-      disableGroupBy: true,
       id: "days",
 
       aggregate: getFirstVal,
@@ -125,7 +116,6 @@ export default function SectionsOverTimeTable({ sections }) {
     {
       Header: "Time",
       accessor: (row) => formatTime(row.section.timeLocations),
-      disableGroupBy: true,
       id: "time",
 
       aggregate: getFirstVal,
@@ -134,7 +124,6 @@ export default function SectionsOverTimeTable({ sections }) {
     {
       Header: "Instructor",
       accessor: (row) => formatInstructors(row.section.instructors),
-      disableGroupBy: true,
       id: "instructor",
 
       aggregate: getFirstVal,
@@ -143,8 +132,6 @@ export default function SectionsOverTimeTable({ sections }) {
     {
       Header: "Enroll Code",
       accessor: "section.enrollCode",
-      disableGroupBy: true,
-
       aggregate: getFirstVal,
       Aggregated: ({ cell: { value } }) => `${value}`,
     },
