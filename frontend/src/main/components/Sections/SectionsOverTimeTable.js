@@ -33,7 +33,7 @@ export default function SectionsOverTimeTable({ sections }) {
       }`,
     );
   };
-  // Stryker enable all
+  // Stryker restore all
   const columns = [
     {
       Header: "Quarter",
