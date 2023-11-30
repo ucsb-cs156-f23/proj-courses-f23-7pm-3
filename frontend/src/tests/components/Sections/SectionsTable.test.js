@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { fiveSections, gigaSections } from "fixtures/sectionFixtures";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
@@ -260,5 +260,31 @@ describe("Section tests", () => {
     expect(
       screen.getByTestId(`${testId}-cell-row-3-col-status`),
     ).toHaveTextContent("CANCELLED");
+  });
+  test("Info button navigates to the course details page", async () => {
+    render(
+      <QueryClientProvider client={queryClient}>
+        <MemoryRouter>
+          <SectionsTable sections={fiveSections} />
+        </MemoryRouter>
+      </QueryClientProvider>,
+    );
+
+    const testId = "SectionsTable";
+
+    expect(
+      screen.getByTestId(`${testId}-cell-row-0-col-courseInfo.courseId`),
+    ).toHaveTextContent("ECE 1A");
+
+    const infoButton = screen.getByTestId(
+      `${testId}-cell-row-0-col-Info-button`,
+    );
+    expect(infoButton).toBeInTheDocument();
+
+    fireEvent.click(infoButton);
+
+    await waitFor(() =>
+      expect(mockedNavigate).toHaveBeenCalledWith("/coursedetails/20221/12583"),
+    );
   });
 });
