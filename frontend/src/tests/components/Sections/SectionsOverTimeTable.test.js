@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import {
   fiveSections,
   sixSections,
@@ -277,5 +277,32 @@ describe("Section tests", () => {
     expect(
       screen.getByTestId(`${testId}-cell-row-4-col-status`),
     ).toHaveTextContent("OPEN");
+  });
+
+  test("Info button navigates to the course details page", async () => {
+    render(
+      <QueryClientProvider client={queryClient}>
+        <MemoryRouter>
+          <SectionsOverTimeTable sections={sixSections} />
+        </MemoryRouter>
+      </QueryClientProvider>,
+    );
+
+    const testId = "SectionsOverTimeTable";
+
+    expect(
+      screen.getByTestId(`${testId}-cell-row-0-col-courseInfo.courseId`),
+    ).toHaveTextContent("CMPSC 130A");
+
+    const infoButton = screen.getByTestId(
+      `${testId}-cell-row-0-col-Info-button`,
+    );
+    expect(infoButton).toBeInTheDocument();
+
+    fireEvent.click(infoButton);
+
+    await waitFor(() =>
+      expect(mockedNavigate).toHaveBeenCalledWith("/coursedetails/20222/08078"),
+    );
   });
 });
