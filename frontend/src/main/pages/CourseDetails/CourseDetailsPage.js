@@ -1,45 +1,38 @@
 import BasicLayout from "main/layouts/BasicLayout/BasicLayout";
+import { useBackend, _useBackendMutation } from "main/utils/useBackend";
 import CourseDetailsTable from "main/components/CourseDetails/CourseDetailsTable";
-// import { useParams } from "react-router-dom";
-// import { useState } from "react";
-// import { useBackend, _useBackendMutation } from "main/utils/useBackend";
-import { useBackendMutation } from "main/utils/useBackend";
-// import BasicCourseTable from "main/components/Courses/BasicCourseTable";
+import { useParams } from "react-router";
 
 export default function CourseDetailsPage() {
+  let { yyyyq, enrollCd } = useParams();
 
-  // const [courseJSON, setCourseJSON] = useState([]);
-
-  const objectToAxiosParams = (query) => ({
-    url: "/api/public/basicsearch",
-    params: {
-      qtr: query.quarter,
-      dept: query.subject,
-      level: query.level,
+  const {
+    data: courseDetail,
+    _error,
+    _status,
+  } = useBackend(
+    // Stryker disable all : hard to test for query caching
+    [`/api/sections/sectionsearch?qtr=${yyyyq}&enrollCode=${enrollCd}`],
+    {
+      // Stryker disable next-line all : GET is the default, so changing this to "" doesn't introduce a bug
+      method: "GET",
+      url: `/api/sections/sectionsearch?qtr=${yyyyq}&enrollCode=${enrollCd}`,
+      params: {
+        yyyyq,
+        enrollCd,
+      },
     },
-  });
-
-  const onSuccess = (courses) => {
-    setCourseJSON(courses.classes);
-  };
-
-  const mutation = useBackendMutation(
-    objectToAxiosParams,
-    { onSuccess },
-    // Stryker disable next-line all : hard to set up test for caching
-    [],
   );
-
-  async function fetchBasicCourseJSON(_event, query) {
-    mutation.mutate(query);
-  }
 
   return (
     <BasicLayout>
       <div className="pt-2">
-        <h5>Welcome to the UCSB Courses Description Search!</h5>
-        {/* <BasicCourseSearchForm fetchJSON={fetchBasicCourseJSON} /> */}
-        <CourseDetailsTable courses={fetchBasicCourseJSON} />
+        <h1>Course Details</h1>
+        {courseDetail && (
+          <CourseDetailsTable
+            courses={[courseDetail]}
+          />
+        )}
       </div>
     </BasicLayout>
   );
