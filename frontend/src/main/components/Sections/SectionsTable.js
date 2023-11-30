@@ -1,7 +1,7 @@
 import SectionsTableBase from "main/components/SectionsTableBase";
 import { Button } from "react-bootstrap";
-
-import { yyyyqToQyy } from "main/utils/quarterUtilities.js";
+import { useNavigate } from "react-router-dom";
+import { yyyyqToQyy, qyyToYyyyq } from "main/utils/quarterUtilities.js";
 import {
   convertToFraction,
   formatDays,
@@ -19,13 +19,21 @@ function getFirstVal(values) {
 }
 
 export default function SectionsTable({ sections }) {
-  // Stryker enable all
-  // Stryker disable BooleanLiteral
+  const navigate = useNavigate();
+
+  // Stryker disable next-line all : TODO try to make a good test for this
+  const infoCallback = (cell) => {
+    navigate(
+      `/coursedetails/${qyyToYyyyq(cell.row.values.quarter)}/${
+        cell.row.values["section.enrollCode"]
+      }`,
+    );
+  };
+  // Stryker restore all
   const columns = [
     {
       Header: "Quarter",
       accessor: (row) => yyyyqToQyy(row.courseInfo.quarter),
-      disableGroupBy: true,
       id: "quarter",
 
       aggregate: getFirstVal,
@@ -40,8 +48,6 @@ export default function SectionsTable({ sections }) {
     {
       Header: "Title",
       accessor: "courseInfo.title",
-      disableGroupBy: true,
-
       aggregate: getFirstVal,
       Aggregated: ({ cell: { value } }) => `${value}`,
     },
@@ -57,6 +63,7 @@ export default function SectionsTable({ sections }) {
       Cell: ({ cell }) => (
         <Button
           variant={"primary"}
+          onClick={() => infoCallback(cell)}
           data-testid={`${testid}-cell-row-${cell.row.index}-col-${cell.column.id}-button`}
         >
           {"ℹ"}
@@ -71,7 +78,6 @@ export default function SectionsTable({ sections }) {
         else if (isSectionFull(row.section)) return "FULL";
         else return "OPEN";
       },
-      disableGroupBy: true,
       id: "status",
 
       aggregate: getFirstVal,
@@ -81,7 +87,6 @@ export default function SectionsTable({ sections }) {
       Header: "Enrolled",
       accessor: (row) =>
         convertToFraction(row.section.enrolledTotal, row.section.maxEnroll),
-      disableGroupBy: true,
       id: "enrolled",
 
       aggregate: getFirstVal,
@@ -90,7 +95,6 @@ export default function SectionsTable({ sections }) {
     {
       Header: "Location",
       accessor: (row) => formatLocation(row.section.timeLocations),
-      disableGroupBy: true,
       id: "location",
 
       aggregate: getFirstVal,
@@ -99,16 +103,13 @@ export default function SectionsTable({ sections }) {
     {
       Header: "Days",
       accessor: (row) => formatDays(row.section.timeLocations),
-      disableGroupBy: true,
       id: "days",
-
       aggregate: getFirstVal,
       Aggregated: ({ cell: { value } }) => `${value}`,
     },
     {
       Header: "Time",
       accessor: (row) => formatTime(row.section.timeLocations),
-      disableGroupBy: true,
       id: "time",
 
       aggregate: getFirstVal,
@@ -117,7 +118,6 @@ export default function SectionsTable({ sections }) {
     {
       Header: "Instructor",
       accessor: (row) => formatInstructors(row.section.instructors),
-      disableGroupBy: true,
       id: "instructor",
 
       aggregate: getFirstVal,
@@ -126,7 +126,6 @@ export default function SectionsTable({ sections }) {
     {
       Header: "Enroll Code",
       accessor: "section.enrollCode",
-      disableGroupBy: true,
 
       aggregate: getFirstVal,
       Aggregated: ({ cell: { value } }) => `${value}`,
