@@ -45,6 +45,7 @@ describe("Section tests", () => {
       "Enrolled",
       "Location",
       "Days",
+      "Info",
       "Time",
       "Instructor",
       "Enroll Code",
@@ -60,6 +61,7 @@ describe("Section tests", () => {
       "time",
       "instructor",
       "section.enrollCode",
+      "Info",
     ];
     const testId = "SectionsOverTimeTable";
 
@@ -124,6 +126,7 @@ describe("Section tests", () => {
       "Time",
       "Instructor",
       "Enroll Code",
+      "Info",
     ];
     const expectedFields = [
       "quarter",
@@ -136,6 +139,7 @@ describe("Section tests", () => {
       "time",
       "instructor",
       "section.enrollCode",
+      "Info",
     ];
     const testId = "SectionsOverTimeTable";
 
@@ -151,6 +155,14 @@ describe("Section tests", () => {
     expect(
       screen.getByTestId(`${testId}-cell-row-0-col-courseInfo.courseId`),
     ).toHaveTextContent("CMPSC 130A");
+    const infoButton = screen.queryByTestId(
+      `${testId}-cell-row-0-col-Info-button`,
+    );
+    expect(infoButton).toBeInTheDocument();
+    expect(infoButton).toHaveClass("btn-primary");
+    expect(
+      screen.getByTestId(`${testId}-cell-row-0-col-Info-button`),
+    ).toHaveTextContent("ℹ");
     expect(
       screen.getByTestId(`${testId}-cell-row-0-col-courseInfo.courseId`),
     ).not.toHaveTextContent("CMPSC 130A -1");

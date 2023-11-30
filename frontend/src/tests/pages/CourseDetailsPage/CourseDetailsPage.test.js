@@ -41,7 +41,7 @@ describe("CourseDetailsPage tests", () => {
     };
 
     axiosMock.onPost("/api/public/basicsearch")
-
+    
     // act
     render(
       <QueryClientProvider client={queryClient}>
@@ -51,7 +51,6 @@ describe("CourseDetailsPage tests", () => {
       </QueryClientProvider>,
     );
 
-    // assert
     expect(screen.getByText("Welcome to the UCSB Course Details Page!")).toBeInTheDocument();
     // expect(axiosMock.history.get[0].params).toEqual({
     //   quarter: "20223",
@@ -66,6 +65,5 @@ describe("CourseDetailsPage tests", () => {
     // }).toBeInTheDocument();
     // expect(
     //   screen.getByText("yyyq and enroll code information will be here"),
-    // ).toBeInTheDocument();
   });
 });
