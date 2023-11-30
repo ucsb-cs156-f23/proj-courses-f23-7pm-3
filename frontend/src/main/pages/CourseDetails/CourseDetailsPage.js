@@ -31,7 +31,7 @@ export default function CourseDetailsPage() {
         {courseDetail && (
           <CourseDetailsTable
             courses={[courseDetail]}
-          />
+          />)}
       </div>
     </BasicLayout>
   );
