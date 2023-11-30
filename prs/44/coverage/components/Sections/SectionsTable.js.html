@@ -209,18 +209,7 @@
 <a name='L144'></a><a href='#L144'>144</a>
 <a name='L145'></a><a href='#L145'>145</a>
 <a name='L146'></a><a href='#L146'>146</a>
-<a name='L147'></a><a href='#L147'>147</a>
-<a name='L148'></a><a href='#L148'>148</a>
-<a name='L149'></a><a href='#L149'>149</a>
-<a name='L150'></a><a href='#L150'>150</a>
-<a name='L151'></a><a href='#L151'>151</a>
-<a name='L152'></a><a href='#L152'>152</a>
-<a name='L153'></a><a href='#L153'>153</a>
-<a name='L154'></a><a href='#L154'>154</a>
-<a name='L155'></a><a href='#L155'>155</a>
-<a name='L156'></a><a href='#L156'>156</a>
-<a name='L157'></a><a href='#L157'>157</a>
-<a name='L158'></a><a href='#L158'>158</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L147'></a><a href='#L147'>147</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -259,7 +248,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">134x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -267,8 +255,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">149x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -306,23 +292,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">134x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">217x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">134x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">217x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -334,6 +309,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">134x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">217x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">134x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -343,7 +324,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">134x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -352,9 +332,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">134x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -413,7 +391,6 @@ export default function SectionsTable({ sections }) {
     {
       Header: "Quarter",
       accessor: (row) =&gt; yyyyqToQyy(row.courseInfo.quarter),
-      disableGroupBy: true,
       id: "quarter",
 &nbsp;
       aggregate: getFirstVal,
@@ -428,8 +405,6 @@ export default function SectionsTable({ sections }) {
     {
       Header: "Title",
       accessor: "courseInfo.title",
-      disableGroupBy: true,
-&nbsp;
       aggregate: getFirstVal,
       Aggregated: ({ cell: { value } }) =&gt; `${value}`,
     },
@@ -460,7 +435,6 @@ export default function SectionsTable({ sections }) {
         else if (isSectionFull(row.section)) return "FULL";
         else return "OPEN";
       },
-      disableGroupBy: true,
       id: "status",
 &nbsp;
       aggregate: getFirstVal,
@@ -470,7 +444,6 @@ export default function SectionsTable({ sections }) {
       Header: "Enrolled",
       accessor: (row) =&gt;
         convertToFraction(row.section.enrolledTotal, row.section.maxEnroll),
-      disableGroupBy: true,
       id: "enrolled",
 &nbsp;
       aggregate: getFirstVal,
@@ -479,7 +452,6 @@ export default function SectionsTable({ sections }) {
     {
       Header: "Location",
       accessor: (row) =&gt; formatLocation(row.section.timeLocations),
-      disableGroupBy: true,
       id: "location",
 &nbsp;
       aggregate: getFirstVal,
@@ -488,16 +460,13 @@ export default function SectionsTable({ sections }) {
     {
       Header: "Days",
       accessor: (row) =&gt; formatDays(row.section.timeLocations),
-      disableGroupBy: true,
       id: "days",
-&nbsp;
       aggregate: getFirstVal,
       Aggregated: ({ cell: { value } }) =&gt; `${value}`,
     },
     {
       Header: "Time",
       accessor: (row) =&gt; formatTime(row.section.timeLocations),
-      disableGroupBy: true,
       id: "time",
 &nbsp;
       aggregate: getFirstVal,
@@ -506,7 +475,6 @@ export default function SectionsTable({ sections }) {
     {
       Header: "Instructor",
       accessor: (row) =&gt; formatInstructors(row.section.instructors),
-      disableGroupBy: true,
       id: "instructor",
 &nbsp;
       aggregate: getFirstVal,
@@ -515,7 +483,6 @@ export default function SectionsTable({ sections }) {
     {
       Header: "Enroll Code",
       accessor: "section.enrollCode",
-      disableGroupBy: true,
 &nbsp;
       aggregate: getFirstVal,
       Aggregated: ({ cell: { value } }) =&gt; `${value}`,
@@ -541,7 +508,7 @@ export default function SectionsTable({ sections }) {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Thu Nov 30 2023 00:46:10 GMT-0800 (Pacific Standard Time)
+                at Thu Nov 30 2023 01:10:02 GMT-0800 (Pacific Standard Time)
             </div>
         <script src="../../prettify.js"></script>
         <script>
