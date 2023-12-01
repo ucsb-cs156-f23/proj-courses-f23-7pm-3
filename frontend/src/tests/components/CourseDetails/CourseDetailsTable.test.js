@@ -28,15 +28,16 @@ describe("CourseTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <CourseDetailsTable courses={courseDetailsFixtures.twoCourses} />
+          <CourseDetailsTable courses={courseDetailsFixtures.oneCourse} />
         </MemoryRouter>
       </QueryClientProvider>,
     );
 
     const expectedHeaders = [
       "Quarter",
-      "Enrollment Code",
-      "Course Id",
+      "Enroll Code",
+      "Course ID",
+      "Section",
       "Title",
       "Enrolled",
       "Location",
@@ -46,8 +47,9 @@ describe("CourseTable tests", () => {
     ];
     const expectedFields = [
       "quarter",
-      "enrollmentCode",
+      "enrollCode",
       "courseId",
+      "section",
       "title",
       "enrolled",
       "location",
@@ -69,30 +71,30 @@ describe("CourseTable tests", () => {
 
     expect(
       screen.getByTestId(`${testId}-cell-row-0-col-quarter`),
-    ).toHaveTextContent("W21");
+    ).toHaveTextContent("W23");
     expect(
-      screen.getByTestId(`${testId}-cell-row-1-col-enrollmentCode`),
-    ).toHaveTextContent("23456");
+      screen.getByTestId(`${testId}-cell-row-0-col-enrollCode`),
+    ).toHaveTextContent("07492");
     expect(
-      screen.getByTestId(`${testId}-cell-row-1-col-courseId`),
-    ).toHaveTextContent("CMPSC 156");
+      screen.getByTestId(`${testId}-cell-row-0-col-courseId`),
+    ).toHaveTextContent("CMPSC 111");
     expect(
-      screen.getByTestId(`${testId}-cell-row-1-col-title`),
-    ).toHaveTextContent("Advanced App Development");
+      screen.getByTestId(`${testId}-cell-row-0-col-title`),
+    ).toHaveTextContent("Intro to Computational Science");
     expect(
-      screen.getByTestId(`${testId}-cell-row-1-col-enrolled`),
-    ).toHaveTextContent("70");
+      screen.getByTestId(`${testId}-cell-row-0-col-enrolled`),
+    ).toHaveTextContent("155/200");
     expect(
-      screen.getByTestId(`${testId}-cell-row-1-col-location`),
-    ).toHaveTextContent("South Hall 1314");
+      screen.getByTestId(`${testId}-cell-row-0-col-location`),
+    ).toHaveTextContent("EMBAR HALL");
     expect(
-      screen.getByTestId(`${testId}-cell-row-1-col-days`),
+      screen.getByTestId(`${testId}-cell-row-0-col-days`),
     ).toHaveTextContent("T R");
     expect(
-      screen.getByTestId(`${testId}-cell-row-1-col-time`),
-    ).toHaveTextContent("2:00-3:15");
+      screen.getByTestId(`${testId}-cell-row-0-col-time`),
+    ).toHaveTextContent("2:00 PM - 3:15 PM");
     expect(
-      screen.getByTestId(`${testId}-cell-row-1-col-instructor`),
-    ).toHaveTextContent("P Conrad");
+      screen.getByTestId(`${testId}-cell-row-0-col-instructor`),
+    ).toHaveTextContent("GRIESSBAUM N");
   });
 });

@@ -10,30 +10,32 @@ import {
 import { yyyyqToQyy } from "main/utils/quarterUtilities.js";
 
 export default function CourseDetailsTable({ courses }) {
-
   console.log(courses);
-
   const columns = [
     {
       Header: "Quarter",
-      accessor: (row, _rowIndex) => yyyyqToQyy(row.quarter),
+      accessor: (row) => yyyyqToQyy(row.quarter),
       id: "quarter",
     },
     {
       Header: "Course ID",
       accessor: "courseId",
+      id: "courseId"
     },
     {
       Header: "Enroll Code",
-      accessor: "classSections[0].enrollCode",
+      accessor: row => row.classSections[0].enrollCode,
+      id: "enrollCode"
     },
     {
       Header: "Section",
-      accessor: "classSections[0].section",
+      accessor: row => row.classSections[0].section,
+      id: "section"
     },
     {
       Header: "Title",
       accessor: "title",
+      id: "title"
     },
     {
       Header: "Enrolled",
@@ -51,7 +53,8 @@ export default function CourseDetailsTable({ courses }) {
     },
     {
       Header: "Days",
-      accessor: "classSections[0].timeLocations[0].days",
+      accessor: row => row.classSections[0].timeLocations[0].days,
+      id: "days"
     },
     {
       Header: "Time",
