@@ -28,10 +28,7 @@ export default function CourseDetailsPage() {
     <BasicLayout>
       <div className="pt-2">
         <h1>Course Details</h1>
-        {courseDetail && (
-          <CourseDetailsTable
-            courses={[courseDetail]}
-          />)}
+        {courseDetail && <CourseDetailsTable courses={[courseDetail]} />}
       </div>
     </BasicLayout>
   );

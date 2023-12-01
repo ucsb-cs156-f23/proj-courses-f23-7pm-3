@@ -20,22 +20,22 @@ export default function CourseDetailsTable({ courses }) {
     {
       Header: "Course ID",
       accessor: "courseId",
-      id: "courseId"
+      id: "courseId",
     },
     {
       Header: "Enroll Code",
-      accessor: row => row.classSections[0].enrollCode,
-      id: "enrollCode"
+      accessor: (row) => row.classSections[0].enrollCode,
+      id: "enrollCode",
     },
     {
       Header: "Section",
-      accessor: row => row.classSections[0].section,
-      id: "section"
+      accessor: (row) => row.classSections[0].section,
+      id: "section",
     },
     {
       Header: "Title",
       accessor: "title",
-      id: "title"
+      id: "title",
     },
     {
       Header: "Enrolled",
@@ -53,8 +53,8 @@ export default function CourseDetailsTable({ courses }) {
     },
     {
       Header: "Days",
-      accessor: row => row.classSections[0].timeLocations[0].days,
-      id: "days"
+      accessor: (row) => row.classSections[0].timeLocations[0].days,
+      id: "days",
     },
     {
       Header: "Time",

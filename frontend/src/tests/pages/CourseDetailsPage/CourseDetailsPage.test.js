@@ -14,8 +14,8 @@ jest.mock("react-router-dom", () => {
     __esModule: true,
     ...originalModule,
     useParams: () => ({
-        yyyyq: 20231,
-        enrollCode: 12345,
+      yyyyq: 20231,
+      enrollCode: 12345,
     }),
     Navigate: (x) => {
       mockNavigate(x);
@@ -75,51 +75,55 @@ describe("CourseDetailsPage tests", () => {
   test("shows the correct info for admin users", async () => {
     setupAdminUser();
     const queryClient = new QueryClient();
-    axiosMock.onGet(`/api/sections/sectionsearch?qtr=20231&enrollCode=12345`).reply(200, {
-      yyyyq: 20231,
-      enrollCd: 12345,
-    });
-    axiosMock.onGet(`/api/sections/sectionsearch?qtr=20231&enrollCode=12345}`).reply(200, [
-    {
-      // quarter: "20231",
-      // enrollmentCode: "12345",
-      // courseId: "CMPSC 156",
-      // title: "Advanced App Development",
-      // enrolled: "70",
-      // location: "South Hall 1314",
-      // days: "T R",
-      // time: "2:00-3:15",
-      // instructor: "P Conrad",
-      quarter: "20231",
-      courseId: "CMPSC 156",
-      title: "Advanced App Development",
-      classSections: [
+    axiosMock
+      .onGet(`/api/sections/sectionsearch?qtr=20231&enrollCode=12345`)
+      .reply(200, {
+        yyyyq: 20231,
+        enrollCd: 12345,
+      });
+    axiosMock
+      .onGet(`/api/sections/sectionsearch?qtr=20231&enrollCode=12345}`)
+      .reply(200, [
         {
-            enrollCode: "12345",
-            section: "0100",
-            enrolledTotal: 155,
-            maxEnroll: 200,
-            timeLocations: [
+          // quarter: "20231",
+          // enrollmentCode: "12345",
+          // courseId: "CMPSC 156",
+          // title: "Advanced App Development",
+          // enrolled: "70",
+          // location: "South Hall 1314",
+          // days: "T R",
+          // time: "2:00-3:15",
+          // instructor: "P Conrad",
+          quarter: "20231",
+          courseId: "CMPSC 156",
+          title: "Advanced App Development",
+          classSections: [
+            {
+              enrollCode: "12345",
+              section: "0100",
+              enrolledTotal: 155,
+              maxEnroll: 200,
+              timeLocations: [
                 {
-                    "room": "HALL",
-                    "building": "EMBAR",
-                    "roomCapacity": 247,
-                    "days": " T R   ",
-                    "beginTime": "14:00",
-                    "endTime": "15:15"
-                }
-            ],
-            instructors: [
+                  room: "HALL",
+                  building: "EMBAR",
+                  roomCapacity: 247,
+                  days: " T R   ",
+                  beginTime: "14:00",
+                  endTime: "15:15",
+                },
+              ],
+              instructors: [
                 {
-                    "instructor": "CONRAD P",
-                    "functionCode": "Teaching and in charge"
-                }
-            ]
-        }
-      ]
-    },
-    ]);
-    
+                  instructor: "CONRAD P",
+                  functionCode: "Teaching and in charge",
+                },
+              ],
+            },
+          ],
+        },
+      ]);
+
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
@@ -128,46 +132,44 @@ describe("CourseDetailsPage tests", () => {
       </QueryClientProvider>,
     );
     await waitFor(() => {
-      expect(
-        screen.getByText("Course Details"),
-      ).toBeInTheDocument();
+      expect(screen.getByText("Course Details")).toBeInTheDocument();
     });
     // await waitFor(() => {
-      expect(
-        screen.getByTestId(`CourseDetailsTable-cell-row-0-col-quarter`),
-      ).toHaveTextContent("W23");
+    expect(
+      screen.getByTestId(`CourseDetailsTable-cell-row-0-col-quarter`),
+    ).toHaveTextContent("W23");
     // });
 
-  //   await waitFor(() => {
-  //     expect(
-  //       screen.getByTestId(`${testId}-cell-row-0-col-enrollCode`),
-  //     ).toHaveTextContent("12345");
-  //   });
+    //   await waitFor(() => {
+    //     expect(
+    //       screen.getByTestId(`${testId}-cell-row-0-col-enrollCode`),
+    //     ).toHaveTextContent("12345");
+    //   });
 
-  //   expect(
-  //     screen.getByTestId(`${testId}-cell-row-0-col-courseId`),
-  //   ).toHaveTextContent("CMPSC 156");
-  //   expect(
-  //     screen.getByTestId(`${testId}-cell-row-0-col-title`),
-  //   ).toHaveTextContent("Advanced App Development");
-  //   expect(
-  //     screen.getByTestId(
-  //       `${testId}-cell-row-0-col-classSections[0].enrolled`,
-  //     ),
-  //   ).toHaveTextContent("155/200");
-  //   expect(
-  //     screen.getByTestId(
-  //       `${testId}-cell-row-0-col-classSections[0].location`,
-  //     ),
-  //   ).toHaveTextContent("EMBAR HALL");
-  //   expect(
-  //     screen.getByTestId(`${testId}-cell-row-0-col-days`),
-  //   ).toHaveTextContent("T R");
-  //   expect(
-  //     screen.getByTestId(`${testId}-cell-row-0-col-time`),
-  //   ).toHaveTextContent("2:00 PM - 3:15 PM");
-  //   expect(
-  //     screen.getByTestId(`${testId}-cell-row-0-col-instructor`),
-  //   ).toHaveTextContent("CONRAD P");
+    //   expect(
+    //     screen.getByTestId(`${testId}-cell-row-0-col-courseId`),
+    //   ).toHaveTextContent("CMPSC 156");
+    //   expect(
+    //     screen.getByTestId(`${testId}-cell-row-0-col-title`),
+    //   ).toHaveTextContent("Advanced App Development");
+    //   expect(
+    //     screen.getByTestId(
+    //       `${testId}-cell-row-0-col-classSections[0].enrolled`,
+    //     ),
+    //   ).toHaveTextContent("155/200");
+    //   expect(
+    //     screen.getByTestId(
+    //       `${testId}-cell-row-0-col-classSections[0].location`,
+    //     ),
+    //   ).toHaveTextContent("EMBAR HALL");
+    //   expect(
+    //     screen.getByTestId(`${testId}-cell-row-0-col-days`),
+    //   ).toHaveTextContent("T R");
+    //   expect(
+    //     screen.getByTestId(`${testId}-cell-row-0-col-time`),
+    //   ).toHaveTextContent("2:00 PM - 3:15 PM");
+    //   expect(
+    //     screen.getByTestId(`${testId}-cell-row-0-col-instructor`),
+    //   ).toHaveTextContent("CONRAD P");
   });
 });
