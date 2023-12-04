@@ -20,7 +20,6 @@ export default function CourseDetailsTable({ courses }) {
     {
       Header: "Course ID",
       accessor: "courseId",
-      //id: "courseId",
     },
     {
       Header: "Enroll Code",
@@ -35,7 +34,6 @@ export default function CourseDetailsTable({ courses }) {
     {
       Header: "Title",
       accessor: "title",
-      //id: "title",
     },
     {
       Header: "Enrolled",
