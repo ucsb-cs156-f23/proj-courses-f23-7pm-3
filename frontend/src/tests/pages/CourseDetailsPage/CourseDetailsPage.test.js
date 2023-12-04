@@ -16,7 +16,7 @@ jest.mock("react-router-dom", () => {
     ...originalModule,
     useParams: () => ({
       yyyyq: 20231,
-      enrollCode: 12345,
+      enrollCd: 12345,
     }),
     Navigate: (x) => {
       mockNavigate(x);
@@ -83,38 +83,38 @@ describe("CourseDetailsPage tests", () => {
     //     enrollCd: 12345,
     //   });
     axiosMock
-      .onGet(`/api/sections/sectionsearch?qtr=20231}&enrollCode=12345}`)
-      //.reply(200, [{ classes: courseDetailsFixtures.oneCourse }]);
+      .onGet(`/api/sections/sectionsearch?qtr=20231&enrollCd=12345`)
+      // .reply(200, [{ classes: courseDetailsFixtures.oneCourse }]);
       .reply(200, [
-        {
-          quarter: "20231",
-          courseId: "CMPSC 156",
-          title: "Advanced App Development",
-          classSections: [
-            {
-              enrollCode: "12345",
-              section: "0100",
-              enrolledTotal: 155,
-              maxEnroll: 200,
-              timeLocations: [
-                {
-                  room: "HALL",
-                  building: "EMBAR",
-                  roomCapacity: 247,
-                  days: " T R   ",
-                  beginTime: "14:00",
-                  endTime: "15:15",
-                },
-              ],
-              instructors: [
-                {
-                  instructor: "CONRAD P",
-                  functionCode: "Teaching and in charge",
-                },
-              ],
-            },
-          ],
-        },
+        // {
+        //   quarter: "20231",
+        //   courseId: "CMPSC 156",
+        //   title: "Advanced App Development",
+        //   classSections: [
+        //     {
+        //       enrollCode: "12345",
+        //       section: "0100",
+        //       enrolledTotal: 155,
+        //       maxEnroll: 200,
+        //       timeLocations: [
+        //         {
+        //           room: "HALL",
+        //           building: "EMBAR",
+        //           roomCapacity: 247,
+        //           days: " T R   ",
+        //           beginTime: "14:00",
+        //           endTime: "15:15",
+        //         },
+        //       ],
+        //       instructors: [
+        //         {
+        //           instructor: "CONRAD P",
+        //           functionCode: "Teaching and in charge",
+        //         },
+        //       ],
+        //     },
+        //   ],
+        // },
       ]);
 
     render(

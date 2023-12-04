@@ -1,7 +1,7 @@
 import BasicLayout from "main/layouts/BasicLayout/BasicLayout";
 import { useBackend, _useBackendMutation } from "main/utils/useBackend";
 import CourseDetailsTable from "main/components/CourseDetails/CourseDetailsTable";
-import { useParams } from "react-router";
+import { useParams } from "react-router-dom";
 
 export default function CourseDetailsPage() {
   let { yyyyq, enrollCd } = useParams();
