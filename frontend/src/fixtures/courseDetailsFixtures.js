@@ -4,7 +4,8 @@ const courseDetailsFixtures = {
     courseId: "CMPSC     5B ",
     title: "INTRO DATA SCI 2",
     contactHours: 30,
-    description: "Students explore the data science lifecycle, including question formulation , data collection and cleaning, exploratory data analysis and visualization , statistical inference and prediction, and decision-making. The course foc us is on transforming and analyzing data; machine learning methods includin g regression, classification and clustering; principles behind data visuali zations; concepts of measurement error and prediction; and techniques for s calable data processing.",
+    description:
+      "Students explore the data science lifecycle, including question formulation , data collection and cleaning, exploratory data analysis and visualization , statistical inference and prediction, and decision-making. The course foc us is on transforming and analyzing data; machine learning methods includin g regression, classification and clustering; principles behind data visuali zations; concepts of measurement error and prediction; and techniques for s calable data processing.",
     college: "ENGR",
     objLevelCode: "U",
     subjectArea: "CMPSC   ",
@@ -20,12 +21,12 @@ const courseDetailsFixtures = {
     generalEducation: [
       {
         geCode: "C  ",
-        geCollege: "L&S "
+        geCollege: "L&S ",
       },
       {
         geCode: "QNT",
-        geCollege: "L&S "
-      }
+        geCollege: "L&S ",
+      },
     ],
     classSections: [
       {
@@ -53,12 +54,12 @@ const courseDetailsFixtures = {
             roomCapacity: 30,
             days: "   R   ",
             beginTime: "18:00",
-            endTime: "18:50"
-          }
+            endTime: "18:50",
+          },
         ],
-        instructors: []
-      }
-    ]
+        instructors: [],
+      },
+    ],
   },
   oneCourse: [
     {

@@ -78,12 +78,37 @@ describe("Course Details Page tests", () => {
       </QueryClientProvider>,
     );
 
-    expect(
-      screen.getByText("Course Details"),
-    ).toBeInTheDocument();
+    expect(screen.getByText("Course Details")).toBeInTheDocument();
 
     expect(
       screen.getByTestId(`CourseDetailsTable-cell-row-0-col-quarter`),
     ).toHaveTextContent("W23");
+    expect(
+      screen.getByTestId(`CourseDetailsTable-cell-row-0-col-courseId`),
+    ).toHaveTextContent("CMPSC 5B");
+    expect(
+      screen.getByTestId(`CourseDetailsTable-cell-row-0-col-enrollCode`),
+    ).toHaveTextContent("07492");
+    expect(
+      screen.getByTestId(`CourseDetailsTable-cell-row-0-col-section`),
+    ).toHaveTextContent("0102");
+    expect(
+      screen.getByTestId(`CourseDetailsTable-cell-row-0-col-title`),
+    ).toHaveTextContent("INTRO DATA SCI 2");
+    expect(
+      screen.getByTestId(`CourseDetailsTable-cell-row-0-col-enrolled`),
+    ).toHaveTextContent("");
+    expect(
+      screen.getByTestId(`CourseDetailsTable-cell-row-0-col-location`),
+    ).toHaveTextContent("GIRV 2116");
+    expect(
+      screen.getByTestId(`CourseDetailsTable-cell-row-0-col-days`),
+    ).toHaveTextContent("R");
+    expect(
+      screen.getByTestId(`CourseDetailsTable-cell-row-0-col-time`),
+    ).toHaveTextContent("6:00 PM - 6:50 PM");
+    expect(
+      screen.getByTestId(`CourseDetailsTable-cell-row-0-col-instructor`),
+    ).toHaveTextContent("");
   });
 });
