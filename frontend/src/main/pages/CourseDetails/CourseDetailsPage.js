@@ -1,7 +1,7 @@
 import BasicLayout from "main/layouts/BasicLayout/BasicLayout";
+import { useParams } from "react-router-dom";
 import { useBackend, _useBackendMutation } from "main/utils/useBackend";
 import CourseDetailsTable from "main/components/CourseDetails/CourseDetailsTable";
-import { useParams } from "react-router";
 
 export default function CourseDetailsPage() {
   let { yyyyq, enrollCd } = useParams();
@@ -28,11 +28,7 @@ export default function CourseDetailsPage() {
     <BasicLayout>
       <div className="pt-2">
         <h1>Course Details</h1>
-        {courseDetail && (
-          <CourseDetailsTable
-            courses={[courseDetail]}
-          />
-        )}
+        {courseDetail && <CourseDetailsTable courses={[courseDetail]} />}
       </div>
     </BasicLayout>
   );

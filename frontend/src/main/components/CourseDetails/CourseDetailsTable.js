@@ -10,13 +10,11 @@ import {
 import { yyyyqToQyy } from "main/utils/quarterUtilities.js";
 
 export default function CourseDetailsTable({ courses }) {
-
   console.log(courses);
-
   const columns = [
     {
       Header: "Quarter",
-      accessor: (row, _rowIndex) => yyyyqToQyy(row.quarter),
+      accessor: (row) => yyyyqToQyy(row.quarter),
       id: "quarter",
     },
     {
@@ -25,11 +23,13 @@ export default function CourseDetailsTable({ courses }) {
     },
     {
       Header: "Enroll Code",
-      accessor: "classSections[0].enrollCode",
+      accessor: (row) => row.classSections[0].enrollCode,
+      id: "enrollCode",
     },
     {
       Header: "Section",
-      accessor: "classSections[0].section",
+      accessor: (row) => row.classSections[0].section,
+      id: "section",
     },
     {
       Header: "Title",
@@ -51,7 +51,8 @@ export default function CourseDetailsTable({ courses }) {
     },
     {
       Header: "Days",
-      accessor: "classSections[0].timeLocations[0].days",
+      accessor: (row) => row.classSections[0].timeLocations[0].days,
+      id: "days",
     },
     {
       Header: "Time",
