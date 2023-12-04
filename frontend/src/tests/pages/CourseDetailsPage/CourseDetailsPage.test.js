@@ -5,7 +5,7 @@ import AxiosMockAdapter from "axios-mock-adapter";
 import CourseDetailsPage from "main/pages/CourseDetails/CourseDetailsPage";
 import { apiCurrentUserFixtures } from "fixtures/currentUserFixtures";
 import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { courseDetailsFixtures } from "fixtures/courseDetailsFixtures";
 
 const mockNavigate = jest.fn();
@@ -15,8 +15,8 @@ jest.mock("react-router-dom", () => {
     __esModule: true,
     ...originalModule,
     useParams: () => ({
-      yyyyq: 20231,
-      enrollCd: 12345,
+      yyyyq: "20231",
+      enrollCd: "07492",
     }),
     Navigate: (x) => {
       mockNavigate(x);
@@ -35,88 +35,41 @@ jest.mock("react-toastify", () => {
   };
 });
 
-describe("CourseDetailsPage tests", () => {
+describe("Course Details Page tests", () => {
   const axiosMock = new AxiosMockAdapter(axios);
-
-  const testId = "CourseDetailsTable";
-
-  const setupAdminUser = () => {
-    axiosMock.reset();
-    axiosMock.resetHistory();
-    axiosMock
-      .onGet("/api/currentUser")
-      .reply(200, apiCurrentUserFixtures.adminUser);
-    axiosMock
-      .onGet("/api/systemInfo")
-      .reply(200, systemInfoFixtures.showingNeither);
-  };
-
   beforeEach(() => {
     jest.spyOn(console, "error");
     console.error.mockImplementation(() => null);
   });
 
-  afterEach(() => {
-    console.error.mockRestore();
-  });
-
-  test("renders without crashing for regular user", () => {
-    const queryClient = new QueryClient();
-    axiosMock.onGet("/api/sections/sectionsearch").reply(200, []);
-
-    render(
-      <QueryClientProvider client={queryClient}>
-        <MemoryRouter>
-          <CourseDetailsPage />
-        </MemoryRouter>
-      </QueryClientProvider>,
-    );
-  });
-
-  test("shows the correct info for admin users", async () => {
-    setupAdminUser();
-    const queryClient = new QueryClient();
-    // axiosMock
-    //   .onGet(`/api/sections/sectionsearch?qtr=20231&enrollCode=12345`)
-    //   .reply(200, {
-    //     yyyyq: 20231,
-    //     enrollCd: 12345,
-    //   });
+  beforeEach(() => {
+    axiosMock.reset();
+    axiosMock.resetHistory();
     axiosMock
-      .onGet(`/api/sections/sectionsearch?qtr=20231&enrollCd=12345`)
-      // .reply(200, [{ classes: courseDetailsFixtures.oneCourse }]);
-      .reply(200, [
-        // {
-        //   quarter: "20231",
-        //   courseId: "CMPSC 156",
-        //   title: "Advanced App Development",
-        //   classSections: [
-        //     {
-        //       enrollCode: "12345",
-        //       section: "0100",
-        //       enrolledTotal: 155,
-        //       maxEnroll: 200,
-        //       timeLocations: [
-        //         {
-        //           room: "HALL",
-        //           building: "EMBAR",
-        //           roomCapacity: 247,
-        //           days: " T R   ",
-        //           beginTime: "14:00",
-        //           endTime: "15:15",
-        //         },
-        //       ],
-        //       instructors: [
-        //         {
-        //           instructor: "CONRAD P",
-        //           functionCode: "Teaching and in charge",
-        //         },
-        //       ],
-        //     },
-        //   ],
-        // },
-      ]);
+      .onGet("/api/currentUser")
+      .reply(200, apiCurrentUserFixtures.userOnly);
+    axiosMock
+      .onGet("/api/systemInfo")
+      .reply(200, systemInfoFixtures.showingNeither);
+    axiosMock
+      .onGet("/api/sections/sectionsearch?qtr=20231&enrollCode=07492", {
+        params: { yyyyq: "20231", enrollCd: "07492" },
+      })
+      .reply(200, courseDetailsFixtures.oneCoursePage);
+  });
 
+  const queryClient = new QueryClient();
+  test("renders without crashing", () => {
+    render(
+      <QueryClientProvider client={queryClient}>
+        <MemoryRouter>
+          <CourseDetailsPage />
+        </MemoryRouter>
+      </QueryClientProvider>,
+    );
+  });
+
+  test("Calls UCSB Section Search api correctly and displays correct information", async () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
@@ -125,45 +78,12 @@ describe("CourseDetailsPage tests", () => {
       </QueryClientProvider>,
     );
 
-    await waitFor(() => {
-      expect(screen.getByText("Course Details")).toBeInTheDocument();
-    });
-    await waitFor(() => {
+    expect(
+      screen.getByText("Course Details"),
+    ).toBeInTheDocument();
+
     expect(
       screen.getByTestId(`CourseDetailsTable-cell-row-0-col-quarter`),
     ).toHaveTextContent("W23");
-    });
-
-    //   await waitFor(() => {
-    //     expect(
-    //       screen.getByTestId(`${testId}-cell-row-0-col-enrollCode`),
-    //     ).toHaveTextContent("12345");
-    //   });
-
-    //   expect(
-    //     screen.getByTestId(`${testId}-cell-row-0-col-courseId`),
-    //   ).toHaveTextContent("CMPSC 156");
-    //   expect(
-    //     screen.getByTestId(`${testId}-cell-row-0-col-title`),
-    //   ).toHaveTextContent("Advanced App Development");
-    //   expect(
-    //     screen.getByTestId(
-    //       `${testId}-cell-row-0-col-classSections[0].enrolled`,
-    //     ),
-    //   ).toHaveTextContent("155/200");
-    //   expect(
-    //     screen.getByTestId(
-    //       `${testId}-cell-row-0-col-classSections[0].location`,
-    //     ),
-    //   ).toHaveTextContent("EMBAR HALL");
-    //   expect(
-    //     screen.getByTestId(`${testId}-cell-row-0-col-days`),
-    //   ).toHaveTextContent("T R");
-    //   expect(
-    //     screen.getByTestId(`${testId}-cell-row-0-col-time`),
-    //   ).toHaveTextContent("2:00 PM - 3:15 PM");
-    //   expect(
-    //     screen.getByTestId(`${testId}-cell-row-0-col-instructor`),
-    //   ).toHaveTextContent("CONRAD P");
   });
 });
