@@ -6,6 +6,7 @@ import CourseDetailsPage from "main/pages/CourseDetails/CourseDetailsPage";
 import { apiCurrentUserFixtures } from "fixtures/currentUserFixtures";
 import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
 import { render, screen, waitFor } from "@testing-library/react";
+import { courseDetailsFixtures } from "fixtures/courseDetailsFixtures";
 
 const mockNavigate = jest.fn();
 jest.mock("react-router-dom", () => {
@@ -75,25 +76,17 @@ describe("CourseDetailsPage tests", () => {
   test("shows the correct info for admin users", async () => {
     setupAdminUser();
     const queryClient = new QueryClient();
+    // axiosMock
+    //   .onGet(`/api/sections/sectionsearch?qtr=20231&enrollCode=12345`)
+    //   .reply(200, {
+    //     yyyyq: 20231,
+    //     enrollCd: 12345,
+    //   });
     axiosMock
-      .onGet(`/api/sections/sectionsearch?qtr=20231&enrollCode=12345`)
-      .reply(200, {
-        yyyyq: 20231,
-        enrollCd: 12345,
-      });
-    axiosMock
-      .onGet(`/api/sections/sectionsearch?qtr=20231&enrollCode=12345}`)
+      .onGet(`/api/sections/sectionsearch?qtr=20231}&enrollCode=12345}`)
+      //.reply(200, [{ classes: courseDetailsFixtures.oneCourse }]);
       .reply(200, [
         {
-          // quarter: "20231",
-          // enrollmentCode: "12345",
-          // courseId: "CMPSC 156",
-          // title: "Advanced App Development",
-          // enrolled: "70",
-          // location: "South Hall 1314",
-          // days: "T R",
-          // time: "2:00-3:15",
-          // instructor: "P Conrad",
           quarter: "20231",
           courseId: "CMPSC 156",
           title: "Advanced App Development",
@@ -131,14 +124,15 @@ describe("CourseDetailsPage tests", () => {
         </MemoryRouter>
       </QueryClientProvider>,
     );
+
     await waitFor(() => {
       expect(screen.getByText("Course Details")).toBeInTheDocument();
     });
-    // await waitFor(() => {
+    await waitFor(() => {
     expect(
       screen.getByTestId(`CourseDetailsTable-cell-row-0-col-quarter`),
     ).toHaveTextContent("W23");
-    // });
+    });
 
     //   await waitFor(() => {
     //     expect(
