@@ -79,6 +79,9 @@ describe("CourseTable tests", () => {
       screen.getByTestId(`${testId}-cell-row-0-col-courseId`),
     ).toHaveTextContent("CMPSC 111");
     expect(
+      screen.getByTestId(`${testId}-cell-row-0-col-section`),
+    ).toHaveTextContent("0100");
+    expect(
       screen.getByTestId(`${testId}-cell-row-0-col-title`),
     ).toHaveTextContent("Intro to Computational Science");
     expect(
