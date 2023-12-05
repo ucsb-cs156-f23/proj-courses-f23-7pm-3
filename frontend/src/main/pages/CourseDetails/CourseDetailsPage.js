@@ -11,7 +11,7 @@ export default function CourseDetailsPage() {
     _error,
     _status,
   } = useBackend(
-    // Stryker disable all : hard to test for query caching
+    // Stryker disable next-line all : hard to test for query caching
     [`/api/sections/sectionsearch?qtr=${yyyyq}&enrollCode=${enrollCd}`],
     {
       // Stryker disable next-line all : GET is the default, so changing this to "" doesn't introduce a bug
