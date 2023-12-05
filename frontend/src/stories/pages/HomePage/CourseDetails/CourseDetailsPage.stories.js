@@ -3,7 +3,7 @@ import React from "react";
 import CourseDetailsPage from "main/pages/CourseDetails/CourseDetailsPage";
 
 export default {
-  title: "pages/CourseDetails/CourseDetailsPage",
+  title: "pages/CourseDetailsPage/CourseDetailsPage",
   component: CourseDetailsPage,
 };
 
