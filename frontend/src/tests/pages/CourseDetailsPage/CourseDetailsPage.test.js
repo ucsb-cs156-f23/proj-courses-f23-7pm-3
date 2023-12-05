@@ -1,4 +1,3 @@
-import { render, screen } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
 import axios from "axios";
@@ -6,11 +5,44 @@ import AxiosMockAdapter from "axios-mock-adapter";
 import CourseDetailsPage from "main/pages/CourseDetails/CourseDetailsPage";
 import { apiCurrentUserFixtures } from "fixtures/currentUserFixtures";
 import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
+import { render, screen } from "@testing-library/react";
+import { courseDetailsFixtures } from "fixtures/courseDetailsFixtures";
 
-describe("CourseDetailsPage tests", () => {
+const mockNavigate = jest.fn();
+jest.mock("react-router-dom", () => {
+  const originalModule = jest.requireActual("react-router-dom");
+  return {
+    __esModule: true,
+    ...originalModule,
+    useParams: () => ({
+      yyyyq: "20231",
+      enrollCd: "07492",
+    }),
+    Navigate: (x) => {
+      mockNavigate(x);
+      return null;
+    },
+  };
+});
+
+const mockToast = jest.fn();
+jest.mock("react-toastify", () => {
+  const originalModule = jest.requireActual("react-toastify");
+  return {
+    __esModule: true,
+    ...originalModule,
+    toast: (x) => mockToast(x),
+  };
+});
+
+describe("Course Details Page tests", () => {
   const axiosMock = new AxiosMockAdapter(axios);
+  beforeEach(() => {
+    jest.spyOn(console, "error");
+    console.error.mockImplementation(() => null);
+  });
 
-  const setupUserOnly = () => {
+  beforeEach(() => {
     axiosMock.reset();
     axiosMock.resetHistory();
     axiosMock
@@ -19,15 +51,25 @@ describe("CourseDetailsPage tests", () => {
     axiosMock
       .onGet("/api/systemInfo")
       .reply(200, systemInfoFixtures.showingNeither);
-  };
+    axiosMock
+      .onGet("/api/sections/sectionsearch?qtr=20231&enrollCode=07492", {
+        params: { yyyyq: "20231", enrollCd: "07492" },
+      })
+      .reply(200, courseDetailsFixtures.oneCoursePage);
+  });
 
   const queryClient = new QueryClient();
-  test("Renders expected content", () => {
-    // arrange
+  test("renders without crashing", () => {
+    render(
+      <QueryClientProvider client={queryClient}>
+        <MemoryRouter>
+          <CourseDetailsPage />
+        </MemoryRouter>
+      </QueryClientProvider>,
+    );
+  });
 
-    setupUserOnly();
-
-    // act
+  test("Calls UCSB Section Search api correctly and displays correct information", async () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
@@ -36,10 +78,37 @@ describe("CourseDetailsPage tests", () => {
       </QueryClientProvider>,
     );
 
-    // assert
-    expect(screen.getByText("Course Details Page")).toBeInTheDocument();
+    expect(screen.getByText("Course Details")).toBeInTheDocument();
+
     expect(
-      screen.getByText("yyyq and enroll code information will be here"),
-    ).toBeInTheDocument();
+      screen.getByTestId(`CourseDetailsTable-cell-row-0-col-quarter`),
+    ).toHaveTextContent("W23");
+    expect(
+      screen.getByTestId(`CourseDetailsTable-cell-row-0-col-courseId`),
+    ).toHaveTextContent("CMPSC 5B");
+    expect(
+      screen.getByTestId(`CourseDetailsTable-cell-row-0-col-enrollCode`),
+    ).toHaveTextContent("07492");
+    expect(
+      screen.getByTestId(`CourseDetailsTable-cell-row-0-col-section`),
+    ).toHaveTextContent("0102");
+    expect(
+      screen.getByTestId(`CourseDetailsTable-cell-row-0-col-title`),
+    ).toHaveTextContent("INTRO DATA SCI 2");
+    expect(
+      screen.getByTestId(`CourseDetailsTable-cell-row-0-col-enrolled`),
+    ).toHaveTextContent("");
+    expect(
+      screen.getByTestId(`CourseDetailsTable-cell-row-0-col-location`),
+    ).toHaveTextContent("GIRV 2116");
+    expect(
+      screen.getByTestId(`CourseDetailsTable-cell-row-0-col-days`),
+    ).toHaveTextContent("R");
+    expect(
+      screen.getByTestId(`CourseDetailsTable-cell-row-0-col-time`),
+    ).toHaveTextContent("6:00 PM - 6:50 PM");
+    expect(
+      screen.getByTestId(`CourseDetailsTable-cell-row-0-col-instructor`),
+    ).toHaveTextContent("");
   });
 });
